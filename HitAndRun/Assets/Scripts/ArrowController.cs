@@ -44,6 +44,12 @@ public class ArrowController : MonoBehaviour {
 		colliders[currentColliderIndex].enabled = true;
 	}
 
+	void OnTriggerEnter2D( Collider2D other )
+	{
+		if (other.CompareTag ("bubble")) {
+			Destroy(other.gameObject);
+		}
+	}
 	private void EnforceBounds()
 	{
 		Vector3 newPosition = transform.position; 
