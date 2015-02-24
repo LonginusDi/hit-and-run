@@ -6,5 +6,11 @@ Chunan Zeng - czeng@usc.edu
 ### Phase One - Sprint 1  ###
 
 Targets
-* Arrow prefab
-* Bubble prefab
+* Arrow Sprites
+* Bubble Sprites
+* Background Sprites
+
+* Arrow Controller
+    -Enforce bounds
+* Bubble Controller
+    -Touch then Explore Animation 
