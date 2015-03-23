@@ -47,7 +47,15 @@ public class ArrowController : MonoBehaviour {
 
 		//Move by accelerometer
 
-
+		if (Input.deviceOrientation == DeviceOrientation.FaceUp) {
+			
+			transform.Translate (Input.acceleration.y, -Input.acceleration.x, 0);
+			
+			Vector3 moveToward = new Vector3 (Input.acceleration.y, -Input.acceleration.x, 0);
+			moveDirection = moveToward - currentPosition;
+			moveDirection.Normalize ();
+			
+		}
 		if (Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
 
 			transform.Translate (Input.acceleration.y, -Input.acceleration.x, 0);
