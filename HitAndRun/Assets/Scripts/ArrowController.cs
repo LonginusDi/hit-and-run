@@ -4,7 +4,8 @@ using System.Collections;
 public class ArrowController : MonoBehaviour {
 	public float moveSpeed;
 	private Vector3 moveDirection;
-	public float turnSpeed;
+	public float turnSpeed ;
+	private float smooth = 150.0f;
 
 	[SerializeField]
 	private PolygonCollider2D[] colliders;
@@ -34,86 +35,24 @@ public class ArrowController : MonoBehaviour {
 		return lowPassValue;
 	}
 
+
 	// Update is called once per frame
 	void Update () {
-
 		Vector3 currentPosition = transform.position;
-//		if( Input.GetButton("Fire1") ) {
-//			Vector3 moveToward = Camera.main.ScreenToWorldPoint( Input.mousePosition );
-//			moveDirection = moveToward - currentPosition;
-//			moveDirection.z = 0; 
-//			moveDirection.Normalize();
-//		}
-
-		//Move by accelerometer
-					
-			transform.Translate (Input.acceleration.y, -Input.acceleration.x, 0);
-			
-			Vector3 moveToward = new Vector3 (Input.acceleration.y, -Input.acceleration.x, 0);
-			moveDirection = moveToward - currentPosition;
-			moveDirection.Normalize ();
-			
-		
-//		if (Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
-//
-//			transform.Translate (Input.acceleration.y, -Input.acceleration.x, 0);
-//		
-//			Vector3 moveToward = new Vector3 (Input.acceleration.y, -Input.acceleration.x, 0);
-//			moveDirection = moveToward - currentPosition;
-//			moveDirection.Normalize ();
-//		
-//		}
-//		if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft) {
-//			
-//			transform.Translate (-Input.acceleration.y, Input.acceleration.x, 0);
-//			
-//			Vector3 moveToward = new Vector3 (-Input.acceleration.y, Input.acceleration.x, 0);
-//			moveDirection = moveToward - currentPosition;
-//			moveDirection.Normalize ();
-//			
-//		}
-//		if (Input.deviceOrientation == DeviceOrientation.Portrait) {
-//
-//			transform.Translate (Input.acceleration.x, Input.acceleration.y, 0);
-//
-//			Vector3 moveToward = new Vector3 (Input.acceleration.x, Input.acceleration.y, 0);
-//			moveDirection = moveToward - currentPosition;
-//			moveDirection.Normalize ();
-//			
-//		}
-//		if (Input.deviceOrientation == DeviceOrientation.Portrait) {
-//			
-//			transform.Translate (-Input.acceleration.x, -Input.acceleration.y, 0);
-//			
-//			Vector3 moveToward = new Vector3 (-Input.acceleration.x, -Input.acceleration.y, 0);
-//			moveDirection = moveToward - currentPosition;
-//			moveDirection.Normalize ();
-//			
-//		}
-//		Vector3 target = moveDirection * moveSpeed + currentPosition;
-//		transform.position = Vector3.Lerp( currentPosition, target, Time.deltaTime );
-
-
-
-		/*
-		//Move by finger
-		if (Input.touchCount == 1 && Input.GetTouch (0).phase == TouchPhase.Moved) {
-			Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
-			
-			Vector3 touchmove = new Vector3(touchDeltaPosition.x, touchDeltaPosition.y, 0);
-			
-			transform.position = Camera.main.ScreenToWorldPoint(touchmove);
-
-			moveDirection = touchDeltaPosition;
-		}
-		*/
+			moveDirection = new Vector3(Input.acceleration.x, Input.acceleration.y, 0);
+			moveDirection.z = 0;
+			moveDirection.Normalize();
+		moveSpeed = Mathf.Sqrt (Mathf.Pow (Input.acceleration.x, 2) + Mathf.Pow (Input.acceleration.y, 2)) * smooth;
+		moveSpeed *= Time.deltaTime;
+		Vector3 target = moveDirection * moveSpeed + currentPosition;
+		transform.position = Vector3.Lerp(currentPosition, target, Time.deltaTime);
 
 		//Rotate Angle
-//		float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-//		transform.rotation = 
-//			Quaternion.Slerp( transform.rotation, 
-//			                 Quaternion.Euler( 0, 0, targetAngle ), 
-//			                 turnSpeed * Time.deltaTime );
+		float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+			transform.rotation = 
+			Quaternion.Slerp (transform.rotation, 
+				                  Quaternion.Euler(0, 0, targetAngle),
+			                 turnSpeed * Time.deltaTime);
 		EnforceBounds();
 	}
 
