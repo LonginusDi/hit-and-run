@@ -28,9 +28,9 @@ public class ArrowController : MonoBehaviour {
 		scoreGT = scoreGO.GetComponent<GUIText> ();
 		scoreGT.text = "0";
 	}
-	
+
 	public Vector3 LowPassFilterAccelerometer() {
-		lowPassValue = new Vector3(Mathf.Lerp(lowPassValue.x, Input.acceleration.x, LowPassFilterFactor), Mathf.Lerp(lowPassValue.y, Input.acceleration.y, LowPassFilterFactor), 0);
+		lowPassValue = new Vector3(Mathf.Lerp(lowPassValue.x, Input.acceleration.y, LowPassFilterFactor), Mathf.Lerp(lowPassValue.y, -Input.acceleration.x, LowPassFilterFactor), 0);
 		return lowPassValue;
 	}
 
@@ -46,52 +46,50 @@ public class ArrowController : MonoBehaviour {
 //		}
 
 		//Move by accelerometer
-
-		if (Input.deviceOrientation == DeviceOrientation.FaceUp) {
-			
+					
 			transform.Translate (Input.acceleration.y, -Input.acceleration.x, 0);
 			
 			Vector3 moveToward = new Vector3 (Input.acceleration.y, -Input.acceleration.x, 0);
 			moveDirection = moveToward - currentPosition;
 			moveDirection.Normalize ();
 			
-		}
-		if (Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
-
-			transform.Translate (Input.acceleration.y, -Input.acceleration.x, 0);
 		
-			Vector3 moveToward = new Vector3 (Input.acceleration.y, -Input.acceleration.x, 0);
-			moveDirection = moveToward - currentPosition;
-			moveDirection.Normalize ();
-		
-		}
-		if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft) {
-			
-			transform.Translate (-Input.acceleration.y, Input.acceleration.x, 0);
-			
-			Vector3 moveToward = new Vector3 (-Input.acceleration.y, Input.acceleration.x, 0);
-			moveDirection = moveToward - currentPosition;
-			moveDirection.Normalize ();
-			
-		}
-		if (Input.deviceOrientation == DeviceOrientation.Portrait) {
-
-			transform.Translate (Input.acceleration.x, Input.acceleration.y, 0);
-
-			Vector3 moveToward = new Vector3 (Input.acceleration.x, Input.acceleration.y, 0);
-			moveDirection = moveToward - currentPosition;
-			moveDirection.Normalize ();
-			
-		}
-		if (Input.deviceOrientation == DeviceOrientation.Portrait) {
-			
-			transform.Translate (-Input.acceleration.x, -Input.acceleration.y, 0);
-			
-			Vector3 moveToward = new Vector3 (-Input.acceleration.x, -Input.acceleration.y, 0);
-			moveDirection = moveToward - currentPosition;
-			moveDirection.Normalize ();
-			
-		}
+//		if (Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
+//
+//			transform.Translate (Input.acceleration.y, -Input.acceleration.x, 0);
+//		
+//			Vector3 moveToward = new Vector3 (Input.acceleration.y, -Input.acceleration.x, 0);
+//			moveDirection = moveToward - currentPosition;
+//			moveDirection.Normalize ();
+//		
+//		}
+//		if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft) {
+//			
+//			transform.Translate (-Input.acceleration.y, Input.acceleration.x, 0);
+//			
+//			Vector3 moveToward = new Vector3 (-Input.acceleration.y, Input.acceleration.x, 0);
+//			moveDirection = moveToward - currentPosition;
+//			moveDirection.Normalize ();
+//			
+//		}
+//		if (Input.deviceOrientation == DeviceOrientation.Portrait) {
+//
+//			transform.Translate (Input.acceleration.x, Input.acceleration.y, 0);
+//
+//			Vector3 moveToward = new Vector3 (Input.acceleration.x, Input.acceleration.y, 0);
+//			moveDirection = moveToward - currentPosition;
+//			moveDirection.Normalize ();
+//			
+//		}
+//		if (Input.deviceOrientation == DeviceOrientation.Portrait) {
+//			
+//			transform.Translate (-Input.acceleration.x, -Input.acceleration.y, 0);
+//			
+//			Vector3 moveToward = new Vector3 (-Input.acceleration.x, -Input.acceleration.y, 0);
+//			moveDirection = moveToward - currentPosition;
+//			moveDirection.Normalize ();
+//			
+//		}
 //		Vector3 target = moveDirection * moveSpeed + currentPosition;
 //		transform.position = Vector3.Lerp( currentPosition, target, Time.deltaTime );
 
@@ -111,11 +109,11 @@ public class ArrowController : MonoBehaviour {
 		*/
 
 		//Rotate Angle
-		float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-		transform.rotation = 
-			Quaternion.Slerp( transform.rotation, 
-			                 Quaternion.Euler( 0, 0, targetAngle ), 
-			                 turnSpeed * Time.deltaTime );
+//		float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+//		transform.rotation = 
+//			Quaternion.Slerp( transform.rotation, 
+//			                 Quaternion.Euler( 0, 0, targetAngle ), 
+//			                 turnSpeed * Time.deltaTime );
 		EnforceBounds();
 	}
 
