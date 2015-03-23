@@ -66,11 +66,37 @@ public class ArrowController : MonoBehaviour {
 	void OnTriggerEnter2D( Collider2D other )
 	{
 		if (other.CompareTag ("bubble")) {
-			Destroy(other.gameObject);
+//			Destroy(other.gameObject);
+			other.transform.parent.GetComponent<BubbleController>().TouchedByArrow();
 			score += 5;
 			scoreGT.text = "" + score;
 		}
 	}
+//	void OnTriggerEnter2D(Collider2D other){
+//		if(other.CompareTag("cat")) {
+//			Transform followTarget = congaLine.Count == 0 ? transform : congaLine[congaLine.Count-1];
+//			other.transform.parent.GetComponent<CatController>().JoinConga( followTarget, moveSpeed, turnSpeed );
+//			congaLine.Add( other.transform );
+//			audio.PlayOneShot(catContactSound);
+//			if (congaLine.Count >= 5) {
+//				Application.LoadLevel("WinScene");
+//			}
+//		}
+//		else if(!isInvincible && other.CompareTag("enemy")) {
+//			isInvincible = true;
+//			timeSpentInvincible = 0;
+//			for( int i = 0; i < 5 && congaLine.Count > 0; i++ ){
+//				int lastIdx = congaLine.Count-1;
+//				Transform cat = congaLine[ lastIdx ];
+//				congaLine.RemoveAt(lastIdx);
+//				cat.parent.GetComponent<CatController>().ExitConga();
+//			}
+//			audio.PlayOneShot(enemyContactSound);
+//			if (--lives <= 0) {
+//				Application.LoadLevel("LoseScene");
+//			}
+//		}
+//	}
 	private void EnforceBounds()
 	{
 		Vector3 newPosition = transform.position; 

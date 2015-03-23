@@ -12,6 +12,8 @@ public class BubbleController : MonoBehaviour {
 	private Vector3 moveToward;
 	private Vector3 currentPosition;
 	private Random random;
+
+	public GameObject dotPrefab;
 	// Use this for initialization
 	void Start () {
 		myCamera = Camera.main;
@@ -44,4 +46,29 @@ public class BubbleController : MonoBehaviour {
 			                  Quaternion.Euler (0, 0, targetAngle), 
 			                  turnSpeed * Time.deltaTime);
 	}
+
+	public void TouchedByArrow(){
+		Transform bubble = transform.FindChild("bubble");
+		bubble.collider2D.enabled = false;
+		bubble.GetComponent<Animator>().SetBool( "IsTouched", true );
+	}
+
+	public void BubbleDisappear(){
+		CreateRedDot ();
+		DestroyObject (gameObject);
+	}
+
+	void CreateRedDot(){
+		Vector3 dotPos = transform.position;
+		float targetAngle1 = Mathf.Atan2(1, 0) * Mathf.Rad2Deg;
+		float targetAngle2 = Mathf.Atan2(-1, 0) * Mathf.Rad2Deg;
+		float targetAngle3 = Mathf.Atan2(0, 1) * Mathf.Rad2Deg;
+		float targetAngle4 = Mathf.Atan2(0, -1) * Mathf.Rad2Deg;
+		Instantiate(dotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle1));
+		Instantiate(dotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle2));
+		Instantiate(dotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle3));
+		Instantiate(dotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle4));
+	}
+
+
 }
