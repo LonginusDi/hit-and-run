@@ -70,6 +70,12 @@ public class ArrowController : MonoBehaviour {
 			other.transform.parent.GetComponent<BubbleController>().TouchedByArrow();
 			score += 5;
 			scoreGT.text = "" + score;
+			if (score >= 200) {
+				Application.LoadLevel("winScene");
+			}
+		}
+		else if (other.CompareTag("reddot")){
+			Application.LoadLevel("failScene");
 		}
 	}
 //	void OnTriggerEnter2D(Collider2D other){

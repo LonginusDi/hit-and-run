@@ -60,14 +60,15 @@ public class BubbleController : MonoBehaviour {
 
 	void CreateRedDot(){
 		Vector3 dotPos = transform.position;
-		float targetAngle1 = Mathf.Atan2(1, 0) * Mathf.Rad2Deg;
-		float targetAngle2 = Mathf.Atan2(-1, 0) * Mathf.Rad2Deg;
-		float targetAngle3 = Mathf.Atan2(0, 1) * Mathf.Rad2Deg;
-		float targetAngle4 = Mathf.Atan2(0, -1) * Mathf.Rad2Deg;
-		Instantiate(dotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle1));
-		Instantiate(dotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle2));
-		Instantiate(dotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle3));
-		Instantiate(dotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle4));
+		float targetAngle1 = Mathf.Atan2(0, 1) * Mathf.Rad2Deg;
+		float targetAngle2 = Mathf.Atan2(0, -1) * Mathf.Rad2Deg;
+		float targetAngle3 = Mathf.Atan2(1, 0) * Mathf.Rad2Deg;
+		float targetAngle4 = Mathf.Atan2(-1, 0) * Mathf.Rad2Deg;
+		float random = Random.Range (targetAngle1, targetAngle3);
+		Instantiate(dotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle1 + random));
+		Instantiate(dotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle2 + random));
+		Instantiate(dotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle3 + random));
+		Instantiate(dotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle4 + random));
 	}
 
 
