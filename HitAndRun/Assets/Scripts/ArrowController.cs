@@ -39,17 +39,23 @@ public class ArrowController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 currentPosition = transform.position;
-		
-		Vector3 moveToward = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		moveDirection = moveToward - currentPosition;
-		moveDirection.z = 0;
-		moveDirection.Normalize();
 
-//			moveDirection = new Vector3(Input.acceleration.x, Input.acceleration.y, 0);
-//			moveDirection.z = 0;
-//			moveDirection.Normalize();
-//		moveSpeed = Mathf.Sqrt (Mathf.Pow (Input.acceleration.x, 2) + Mathf.Pow (Input.acceleration.y, 2)) * smooth;
-//		moveSpeed *= Time.deltaTime;
+		//mouse
+//		Vector3 moveToward = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+//		moveDirection = moveToward - currentPosition;
+//		moveDirection.z = 0;
+//		moveDirection.Normalize();
+
+
+		//Accelerometer
+			moveDirection = new Vector3(Input.acceleration.x, Input.acceleration.y, 0);
+			moveDirection.z = 0;
+			moveDirection.Normalize();
+		moveSpeed = Mathf.Sqrt (Mathf.Pow (Input.acceleration.x, 2) + Mathf.Pow (Input.acceleration.y, 2)) * smooth;
+		moveSpeed *= Time.deltaTime;
+
+
+
 		Vector3 target = moveDirection * moveSpeed + currentPosition;
 		transform.position = Vector3.Lerp(currentPosition, target, Time.deltaTime);
 
