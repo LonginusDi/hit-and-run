@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class ArrowController : MonoBehaviour {
-	public float moveSpeed;
+	public float moveSpeed = 2.0f;
 	private Vector3 moveDirection;
 	public float turnSpeed ;
 	private float smooth = 150.0f;
@@ -39,11 +39,17 @@ public class ArrowController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 currentPosition = transform.position;
-			moveDirection = new Vector3(Input.acceleration.x, Input.acceleration.y, 0);
-			moveDirection.z = 0;
-			moveDirection.Normalize();
-		moveSpeed = Mathf.Sqrt (Mathf.Pow (Input.acceleration.x, 2) + Mathf.Pow (Input.acceleration.y, 2)) * smooth;
-		moveSpeed *= Time.deltaTime;
+		
+		Vector3 moveToward = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		moveDirection = moveToward - currentPosition;
+		moveDirection.z = 0;
+		moveDirection.Normalize();
+
+//			moveDirection = new Vector3(Input.acceleration.x, Input.acceleration.y, 0);
+//			moveDirection.z = 0;
+//			moveDirection.Normalize();
+//		moveSpeed = Mathf.Sqrt (Mathf.Pow (Input.acceleration.x, 2) + Mathf.Pow (Input.acceleration.y, 2)) * smooth;
+//		moveSpeed *= Time.deltaTime;
 		Vector3 target = moveDirection * moveSpeed + currentPosition;
 		transform.position = Vector3.Lerp(currentPosition, target, Time.deltaTime);
 
@@ -78,31 +84,8 @@ public class ArrowController : MonoBehaviour {
 			Application.LoadLevel("failScene");
 		}
 	}
-//	void OnTriggerEnter2D(Collider2D other){
-//		if(other.CompareTag("cat")) {
-//			Transform followTarget = congaLine.Count == 0 ? transform : congaLine[congaLine.Count-1];
-//			other.transform.parent.GetComponent<CatController>().JoinConga( followTarget, moveSpeed, turnSpeed );
-//			congaLine.Add( other.transform );
-//			audio.PlayOneShot(catContactSound);
-//			if (congaLine.Count >= 5) {
-//				Application.LoadLevel("WinScene");
-//			}
-//		}
-//		else if(!isInvincible && other.CompareTag("enemy")) {
-//			isInvincible = true;
-//			timeSpentInvincible = 0;
-//			for( int i = 0; i < 5 && congaLine.Count > 0; i++ ){
-//				int lastIdx = congaLine.Count-1;
-//				Transform cat = congaLine[ lastIdx ];
-//				congaLine.RemoveAt(lastIdx);
-//				cat.parent.GetComponent<CatController>().ExitConga();
-//			}
-//			audio.PlayOneShot(enemyContactSound);
-//			if (--lives <= 0) {
-//				Application.LoadLevel("LoseScene");
-//			}
-//		}
-//	}
+
+
 	private void EnforceBounds()
 	{
 		Vector3 newPosition = transform.position; 
