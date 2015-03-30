@@ -16,18 +16,19 @@ public class ArrowController : MonoBehaviour {
 	private float LowPassFilterFactor = AccelerometerUpdateInterval / LowPassKernelWidthInSeconds; 
 	private Vector3 lowPassValue = Vector3.zero;
 
-	public static int score = 0;
-	private GUIText scoreGT;
+	public static int hp = 0;
+	private GUIText hpGT;
+	private float lastUpdate;
 
 	// Use this for initialization
 	void Start () {
 		moveDirection = Vector3.right;
 		lowPassValue = Input.acceleration;
 
-		score = 0;
-		GameObject scoreGO = GameObject.Find ("score");
-		scoreGT = scoreGO.GetComponent<GUIText> ();
-		scoreGT.text = "0";
+		hp = 100;
+		GameObject hpGO = GameObject.Find ("hp");
+		hpGT = hpGO.GetComponent<GUIText> ();
+		hpGT.text = "HP: 100";
 	}
 
 	public Vector3 LowPassFilterAccelerometer() {
@@ -65,6 +66,21 @@ public class ArrowController : MonoBehaviour {
 			Quaternion.Slerp (transform.rotation, 
 				                  Quaternion.Euler(0, 0, targetAngle),
 			                 turnSpeed * Time.deltaTime);
+
+		//hp will reduce according to time
+		if(Time.time - lastUpdate >= 2f){
+			hp = hp - 5;
+			hpGT.text = "HP: " + hp;
+			lastUpdate = Time.time;
+		}
+
+		if (hp >= 200) {
+			Application.LoadLevel("winScene");
+		}
+		if (hp <= 0){
+			Application.LoadLevel("failScene");
+		}
+
 		EnforceBounds();
 	}
 
@@ -80,14 +96,18 @@ public class ArrowController : MonoBehaviour {
 		if (other.CompareTag ("bubble")) {
 //			Destroy(other.gameObject);
 			other.transform.parent.GetComponent<BubbleController>().TouchedByArrow();
-			score += 5;
-			scoreGT.text = "" + score;
-			if (score >= 200) {
+			hp += 5;
+			hpGT.text = "HP: " + hp;
+			if (hp >= 200) {
 				Application.LoadLevel("winScene");
 			}
 		}
 		else if (other.CompareTag("reddot")){
-			Application.LoadLevel("failScene");
+			hp -= 15;
+			hpGT.text = "HP: " + hp;
+			if (hp <= 0){
+				Application.LoadLevel("failScene");
+			}
 		}
 	}
 

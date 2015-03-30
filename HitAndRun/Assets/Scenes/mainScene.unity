@@ -260,7 +260,7 @@ GameObject:
   - 4: {fileID: 1588486526}
   - 132: {fileID: 1588486525}
   m_Layer: 0
-  m_Name: score
+  m_Name: hp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
