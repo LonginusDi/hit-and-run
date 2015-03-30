@@ -68,7 +68,7 @@ public class ArrowController : MonoBehaviour {
 			                 turnSpeed * Time.deltaTime);
 
 		//hp will reduce according to time
-		if(Time.time - lastUpdate >= 2f){
+		if(Time.time - lastUpdate >= 5f){
 			hp = hp - 5;
 			hpGT.text = "HP: " + hp;
 			lastUpdate = Time.time;

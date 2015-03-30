@@ -3,11 +3,14 @@
 public class BubbleCreator: MonoBehaviour {
 	public float minSpawnTime = 2f; 
 	public float maxSpawnTime = 5f; 
-	
+	private float startTime;
+	private float pastTime;
+
 	public GameObject bubblePrefab;
 	
 	void Start () 
 	{
+		startTime = Time.time;
 		Invoke("SpawnBubble",minSpawnTime);
 	}
 	
@@ -24,7 +27,8 @@ public class BubbleCreator: MonoBehaviour {
 			            bubblePrefab.transform.position.z);
 		
 		Instantiate(bubblePrefab, bubblePos, Quaternion.identity);
-		
-		Invoke("SpawnBubble", Random.Range(minSpawnTime, maxSpawnTime));
+		pastTime = Time.time - startTime;
+		pastTime = 1 + pastTime / 10;
+		Invoke("SpawnBubble", Random.Range(minSpawnTime/pastTime, maxSpawnTime/pastTime));
 	}
 }
