@@ -41,6 +41,11 @@ public class ArrowController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 currentPosition = transform.position;
+		
+		if (speedUpTime != 0 && Time.time - speedUpTime > 5) {
+			speedUpTime = 0.0f;
+			moveSpeed = moveSpeed / 2;
+		}
 
 		//mouse
 		Vector3 moveToward = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -53,10 +58,6 @@ public class ArrowController : MonoBehaviour {
 //			moveDirection = new Vector3(Input.acceleration.x, Input.acceleration.y, 0);
 //			moveDirection.z = 0;
 //			moveDirection.Normalize();
-		if (speedUpTime != 0 && Time.time - speedUpTime > 5) {
-			speedUpTime = 0.0f;
-			moveSpeed = moveSpeed / 2;
-		}
 //		moveSpeed = Mathf.Sqrt (Mathf.Pow (Input.acceleration.x, 2) + Mathf.Pow (Input.acceleration.y, 2)) * smooth;
 //		moveSpeed *= Time.deltaTime;
 
@@ -108,6 +109,7 @@ public class ArrowController : MonoBehaviour {
 			}
 		}
 		else if (other.CompareTag("reddot")){
+			StartCoroutine(Blink(1.4f));
 			hp -= 15;
 			hpGT.text = "HP: " + hp;
 			if (hp <= 0){
@@ -160,5 +162,16 @@ public class ArrowController : MonoBehaviour {
 			moveDirection.y = -moveDirection.y;
 		}
 		transform.position = newPosition;
+	}
+
+	IEnumerator Blink(float waitTime){
+		float endTime = Time.time + waitTime;
+		while (Time.time < endTime) {
+			renderer.enabled = false;
+			yield return new WaitForSeconds(0.1f);
+			renderer.enabled = true;
+			yield return new WaitForSeconds(0.1f);
+
+		}
 	}
 }
