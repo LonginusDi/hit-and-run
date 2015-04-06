@@ -61,14 +61,27 @@ public class BlueDotController : MonoBehaviour {
 	{
 		if (other.CompareTag ("arrow")) {
 //			Destroy (gameObject);
-			renderer.enabled = false;
+//			renderer.enabled = false;
 			Vector3 scale = transform.localScale;
 			scale = scale * 3;
 			transform.localScale = scale;
-			if (other.CompareTag("reddot")){
-				Destroy(other);
-			}
+			speed = 0.0f;
+			StartCoroutine(EliminateRedDots(1.0f));
+//			if (other.CompareTag("reddot")){
+//				Destroy(other);
+//			}
 		}
 
+	}
+
+	IEnumerator EliminateRedDots(float waitTime){
+		float endTime = Time.time + waitTime;
+		while (Time.time < endTime) {
+			renderer.enabled = false;
+			yield return new WaitForSeconds(0.1f);
+			renderer.enabled = true;
+			yield return new WaitForSeconds(0.1f);
+		}
+//		Destroy (gameObject);
 	}
 }

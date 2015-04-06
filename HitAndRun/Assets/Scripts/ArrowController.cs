@@ -119,24 +119,20 @@ public class ArrowController : MonoBehaviour {
 		else if (other.CompareTag("yellowdot")){
 			moveSpeed = moveSpeed * 2;
 			speedUpTime = Time.time;
-			hpGT.text = "HP: " + hp;
-			if (hp <= 0){
-				Application.LoadLevel("failScene");
-			}
+			Destroy (other);
 		}
 		else if (other.CompareTag("greendot")){
 			hp += 15;
 			hpGT.text = "HP: " + hp;
-			if (hp <= 0){
-				Application.LoadLevel("failScene");
+			if (hp >= 200){
+				Application.LoadLevel("winScene");
 			}
+			Destroy (other);
 		}
 		else if (other.CompareTag("bluedot")){
 			//hp -= 15;
 			hpGT.text = "HP: " + hp;
-			if (hp <= 0){
-				Application.LoadLevel("failScene");
-			}
+			Destroy (other);
 		}
 	}
 

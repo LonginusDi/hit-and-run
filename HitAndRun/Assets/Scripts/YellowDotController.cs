@@ -56,4 +56,11 @@ public class YellowDotController : MonoBehaviour {
 		}
 		transform.position = newPosition;
 	}
+
+	void OnTriggerEnter2D( Collider2D other )
+	{
+		if (other.CompareTag ("arrow")) {
+			Destroy (gameObject);
+		}
+	}
 }
