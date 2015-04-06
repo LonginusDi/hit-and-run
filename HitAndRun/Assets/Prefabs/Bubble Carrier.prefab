@@ -124,7 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6231cbdef7fc54e69895f276fabcd162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dotPrefab: {fileID: 159988, guid: a65da991888334719928259823eef1dd, type: 2}
+  redDotPrefab: {fileID: 159988, guid: a65da991888334719928259823eef1dd, type: 2}
+  greenDotPrefab: {fileID: 183266, guid: 622ad312fe8c04b29a2aa0512c94510c, type: 2}
+  yellowDotPrefab: {fileID: 149176, guid: 969af59d2184742358d389449ae8dca5, type: 2}
+  blueDotPrefab: {fileID: 144026, guid: dd2274922415f4b319af3a0fcfd36b5b, type: 2}
 --- !u!212 &21242114
 SpriteRenderer:
   m_ObjectHideFlags: 1

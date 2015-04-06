@@ -7,6 +7,7 @@ public class ArrowController : MonoBehaviour {
 	public float turnSpeed ;
 	private float smooth = 150.0f;
 
+	private float speedUpTime = 0.0f;
 	[SerializeField]
 	private PolygonCollider2D[] colliders;
 	private int currentColliderIndex = 0;
@@ -42,18 +43,22 @@ public class ArrowController : MonoBehaviour {
 		Vector3 currentPosition = transform.position;
 
 		//mouse
-//		Vector3 moveToward = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-//		moveDirection = moveToward - currentPosition;
-//		moveDirection.z = 0;
-//		moveDirection.Normalize();
+		Vector3 moveToward = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		moveDirection = moveToward - currentPosition;
+		moveDirection.z = 0;
+		moveDirection.Normalize();
 
 
 		//Accelerometer
-			moveDirection = new Vector3(Input.acceleration.x, Input.acceleration.y, 0);
-			moveDirection.z = 0;
-			moveDirection.Normalize();
-		moveSpeed = Mathf.Sqrt (Mathf.Pow (Input.acceleration.x, 2) + Mathf.Pow (Input.acceleration.y, 2)) * smooth;
-		moveSpeed *= Time.deltaTime;
+//			moveDirection = new Vector3(Input.acceleration.x, Input.acceleration.y, 0);
+//			moveDirection.z = 0;
+//			moveDirection.Normalize();
+		if (speedUpTime != 0 && Time.time - speedUpTime > 5) {
+			speedUpTime = 0.0f;
+			moveSpeed = moveSpeed / 2;
+		}
+//		moveSpeed = Mathf.Sqrt (Mathf.Pow (Input.acceleration.x, 2) + Mathf.Pow (Input.acceleration.y, 2)) * smooth;
+//		moveSpeed *= Time.deltaTime;
 
 
 
@@ -104,6 +109,28 @@ public class ArrowController : MonoBehaviour {
 		}
 		else if (other.CompareTag("reddot")){
 			hp -= 15;
+			hpGT.text = "HP: " + hp;
+			if (hp <= 0){
+				Application.LoadLevel("failScene");
+			}
+		}
+		else if (other.CompareTag("yellowdot")){
+			moveSpeed = moveSpeed * 2;
+			speedUpTime = Time.time;
+			hpGT.text = "HP: " + hp;
+			if (hp <= 0){
+				Application.LoadLevel("failScene");
+			}
+		}
+		else if (other.CompareTag("greendot")){
+			hp += 15;
+			hpGT.text = "HP: " + hp;
+			if (hp <= 0){
+				Application.LoadLevel("failScene");
+			}
+		}
+		else if (other.CompareTag("bluedot")){
+			//hp -= 15;
 			hpGT.text = "HP: " + hp;
 			if (hp <= 0){
 				Application.LoadLevel("failScene");

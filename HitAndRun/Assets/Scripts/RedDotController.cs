@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DotController : MonoBehaviour {
+public class RedDotController : MonoBehaviour {
 	public float speed = 0.1f;
 	private float xMax;
 	private float yMax;
