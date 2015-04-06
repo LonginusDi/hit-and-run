@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RedDotController : MonoBehaviour {
-	public float speed = 0.1f;
+public class YellowDotController : MonoBehaviour {
+	public float speed = 0.2f;
 	private float xMax;
 	private float yMax;
 	private Vector3 moveDirection;
@@ -10,9 +10,9 @@ public class RedDotController : MonoBehaviour {
 	private Vector3 moveToward;
 	private Vector3 currentPosition;
 	private Vector3 forward;
-
+	
 	public static float timeCount;
-
+	
 	private float startTime;
 	// Use this for initialization
 	void Start () {
@@ -29,11 +29,11 @@ public class RedDotController : MonoBehaviour {
 			Destroy (gameObject);
 		}
 	}
-
+	
 	public void OnBecameInvisible() {
 		Destroy( gameObject ); 
 	}
-
+	
 	private void EnforceBounds()
 	{
 		Vector3 newPosition = transform.position; 
@@ -55,20 +55,5 @@ public class RedDotController : MonoBehaviour {
 			forward.y = -forward.y;
 		}
 		transform.position = newPosition;
-	}
-
-	void OnTriggerEnter2D( Collider2D other )
-	{
-		if (other.CompareTag ("arrow")) {
-			Destroy (gameObject);
-		}
-//		else if (other.CompareTag("arrow")){
-//			StartCoroutine(Blink(1.4f));
-//			hp -= 15;
-//			hpGT.text = "HP: " + hp;
-//			if (hp <= 0){
-//				Application.LoadLevel("failScene");
-//			}
-//		}
 	}
 }

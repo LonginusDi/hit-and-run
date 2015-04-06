@@ -9,9 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 444026}
   - 212: {fileID: 21244026}
-  - 114: {fileID: 11482514}
   - 50: {fileID: 5046776}
   - 60: {fileID: 6046776}
+  - 114: {fileID: 11464492}
   m_Layer: 8
   m_Name: blue_droplet
   m_TagString: bluedot
@@ -167,7 +167,7 @@ PolygonCollider2D:
       - {x: .917993307, y: -9.98073578}
       - {x: 1.13284278, y: -9.94167233}
       - {x: 1.56254172, y: -9.84401321}
---- !u!114 &11482514
+--- !u!114 &11464492
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -175,10 +175,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 144026}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a08060e5531c403f9a0bec22034c833, type: 3}
+  m_Script: {fileID: 11500000, guid: 37046be2b8d2b4f32ab5c689c3d43b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1
 --- !u!212 &21244026
 SpriteRenderer:
   m_ObjectHideFlags: 1

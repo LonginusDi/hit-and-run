@@ -9,9 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 483266}
   - 212: {fileID: 21283266}
-  - 114: {fileID: 11499454}
   - 50: {fileID: 5099454}
   - 60: {fileID: 6099454}
+  - 114: {fileID: 11443014}
   m_Layer: 8
   m_Name: green_cross
   m_TagString: greendot
@@ -72,7 +72,7 @@ PolygonCollider2D:
       - {x: 1.45500004, y: -.349999994}
       - {x: 1.45500004, y: .349999994}
       - {x: 1.39499998, y: .400000006}
---- !u!114 &11499454
+--- !u!114 &11443014
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -80,10 +80,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 183266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a08060e5531c403f9a0bec22034c833, type: 3}
+  m_Script: {fileID: 11500000, guid: 206bc1b6fa23d49fb8e7c612d5b47f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1
 --- !u!212 &21283266
 SpriteRenderer:
   m_ObjectHideFlags: 1

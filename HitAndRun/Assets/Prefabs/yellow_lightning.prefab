@@ -9,9 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 449176}
   - 212: {fileID: 21249176}
-  - 114: {fileID: 11417666}
   - 50: {fileID: 5017666}
   - 60: {fileID: 6017666}
+  - 114: {fileID: 11433620}
   m_Layer: 8
   m_Name: yellow_lightning
   m_TagString: yellowdot
@@ -108,7 +108,7 @@ PolygonCollider2D:
       - {x: .0299999993, y: -2.63000011}
       - {x: .0599999987, y: -2.61999989}
       - {x: .100000001, y: -2.46000004}
---- !u!114 &11417666
+--- !u!114 &11433620
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -116,10 +116,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 149176}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a08060e5531c403f9a0bec22034c833, type: 3}
+  m_Script: {fileID: 11500000, guid: bc06ce2740d344f1eb99224656b1b450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 4
 --- !u!212 &21249176
 SpriteRenderer:
   m_ObjectHideFlags: 1
