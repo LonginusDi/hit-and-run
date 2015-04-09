@@ -68,10 +68,41 @@ public class BubbleController : MonoBehaviour {
 		float targetAngle3 = Mathf.Atan2(1, 0) * Mathf.Rad2Deg;
 		float targetAngle4 = Mathf.Atan2(-1, 0) * Mathf.Rad2Deg;
 		float random = Random.Range (targetAngle1, targetAngle3);
-		Instantiate(redDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle1 + random));
-		Instantiate(greenDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle2 + random));
-		Instantiate(blueDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle3 + random));
-		Instantiate(yellowDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle4 + random));
+		if (Random.Range (0, 100) > 90) {
+			
+			Instantiate(yellowDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle1 + random));
+		} else {
+			Instantiate(redDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle1 + random));
+
+		}
+		if (Random.Range (0, 100) > 90) {
+			
+			Instantiate(blueDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle2 + random));
+		} else {
+			Instantiate(redDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle2 + random));
+			
+		}
+		if (Random.Range (0, 100) > 95) {
+			
+			Instantiate(greenDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle3 + random));
+		} else {
+			Instantiate(redDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle3 + random));
+			
+		}
+		if (Random.Range (0, 100) > 90) {
+			
+			Instantiate(blueDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle4 + random));
+		} else {
+			Instantiate(redDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle4 + random));
+			
+		}
+//		Instantiate(redDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle1 + random));
+//		Instantiate(blueDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle2 + random));
+//		Instantiate(blueDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle4 + random));
+//		Instantiate(redDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle1 + random));
+//		Instantiate(greenDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle2 + random));
+//		Instantiate(blueDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle3 + random));
+//		Instantiate(yellowDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle4 + random));
 	}
 
 

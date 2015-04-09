@@ -61,14 +61,10 @@ public class RedDotController : MonoBehaviour {
 	{
 		if (other.CompareTag ("arrow")) {
 			Destroy (gameObject);
-		}
-//		else if (other.CompareTag("arrow")){
-//			StartCoroutine(Blink(1.4f));
-//			hp -= 15;
-//			hpGT.text = "HP: " + hp;
-//			if (hp <= 0){
-//				Application.LoadLevel("failScene");
-//			}
+		} 
+//		else if ((BlueDotController.EliminateRedDots == true && other.CompareTag ("bluedot"))) {
+//			BlueDotController.EliminateRedDots = false;
+//			Destroy (gameObject);
 //		}
 	}
 }

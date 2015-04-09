@@ -10,8 +10,10 @@ public class BlueDotController : MonoBehaviour {
 	private Vector3 moveToward;
 	private Vector3 currentPosition;
 	private Vector3 forward;
+
+	private bool EliminateRedDots = false;
 	
-	public static float timeCount;
+	public static float timeCount = Mathf.Infinity;
 	
 	private float startTime;
 	// Use this for initialization
@@ -62,26 +64,36 @@ public class BlueDotController : MonoBehaviour {
 		if (other.CompareTag ("arrow")) {
 //			Destroy (gameObject);
 //			renderer.enabled = false;
+			GetComponent<Animator>().SetBool( "IsTouched", true );
+			EliminateRedDots = true;
 			Vector3 scale = transform.localScale;
 			scale = scale * 3;
 			transform.localScale = scale;
 			speed = 0.0f;
-			StartCoroutine(EliminateRedDots(1.0f));
+//			StartCoroutine(EliminateRedDots(1.0f));
 //			if (other.CompareTag("reddot")){
 //				Destroy(other);
 //			}
 		}
+		else if (EliminateRedDots == true && other.CompareTag ("reddot")) {
+			Destroy (other.gameObject);
+
+		}
 
 	}
 
-	IEnumerator EliminateRedDots(float waitTime){
-		float endTime = Time.time + waitTime;
-		while (Time.time < endTime) {
-			renderer.enabled = false;
-			yield return new WaitForSeconds(0.1f);
-			renderer.enabled = true;
-			yield return new WaitForSeconds(0.1f);
-		}
-//		Destroy (gameObject);
+//	IEnumerator EliminateRedDots(float waitTime){
+//		float endTime = Time.time + waitTime;
+//		while (Time.time < endTime) {
+//			renderer.enabled = false;
+//			yield return new WaitForSeconds(0.1f);
+//			renderer.enabled = true;
+//			yield return new WaitForSeconds(0.1f);
+//		}
+////		Destroy (gameObject);
+//	}
+
+	void MissionComplete(){
+		Destroy (gameObject);
 	}
 }

@@ -7,6 +7,8 @@ public class ArrowController : MonoBehaviour {
 	public float turnSpeed ;
 	private float smooth = 150.0f;
 
+	public static bool isInvincible = false;
+
 	private float speedUpTime = 0.0f;
 	[SerializeField]
 	private PolygonCollider2D[] colliders;
@@ -48,18 +50,18 @@ public class ArrowController : MonoBehaviour {
 		}
 
 		//mouse
-		Vector3 moveToward = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		moveDirection = moveToward - currentPosition;
-		moveDirection.z = 0;
-		moveDirection.Normalize();
+//		Vector3 moveToward = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+//		moveDirection = moveToward - currentPosition;
+//		moveDirection.z = 0;
+//		moveDirection.Normalize();
 
 
 		//Accelerometer
-//			moveDirection = new Vector3(Input.acceleration.x, Input.acceleration.y, 0);
-//			moveDirection.z = 0;
-//			moveDirection.Normalize();
-//		moveSpeed = Mathf.Sqrt (Mathf.Pow (Input.acceleration.x, 2) + Mathf.Pow (Input.acceleration.y, 2)) * smooth;
-//		moveSpeed *= Time.deltaTime;
+			moveDirection = new Vector3(Input.acceleration.x, Input.acceleration.y, 0);
+			moveDirection.z = 0;
+			moveDirection.Normalize();
+		moveSpeed = Mathf.Sqrt (Mathf.Pow (Input.acceleration.x, 2) + Mathf.Pow (Input.acceleration.y, 2)) * smooth;
+		moveSpeed *= Time.deltaTime;
 
 
 
@@ -108,9 +110,9 @@ public class ArrowController : MonoBehaviour {
 				Application.LoadLevel("winScene");
 			}
 		}
-		else if (other.CompareTag("reddot")){
+		else if (other.CompareTag("reddot") && isInvincible == false){
 			StartCoroutine(Blink(1.4f));
-			hp -= 15;
+			hp -= 30;
 			hpGT.text = "HP: " + hp;
 			if (hp <= 0){
 				Application.LoadLevel("failScene");
@@ -162,6 +164,7 @@ public class ArrowController : MonoBehaviour {
 
 	IEnumerator Blink(float waitTime){
 		float endTime = Time.time + waitTime;
+		isInvincible = true;
 		while (Time.time < endTime) {
 			renderer.enabled = false;
 			yield return new WaitForSeconds(0.1f);
@@ -169,5 +172,6 @@ public class ArrowController : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 
 		}
+		isInvincible = false;
 	}
 }
