@@ -15,3 +15,5 @@ EditorBuildSettings:
     path: Assets/Scenes/winScene.unity
   - enabled: 1
     path: Assets/Scenes/failScene.unity
+  - enabled: 1
+    path: Assets/Examples/InteractiveConsole.unity
