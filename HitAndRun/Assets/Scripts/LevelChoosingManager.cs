@@ -11,7 +11,7 @@ public class LevelChoosingManager : MonoBehaviour {
 	}
 
 	public void ChooseMedium(){		
-		RedDotController.timeCount = 20.0f;
+		RedDotController.timeCount = 15.0f;
 		BlueDotController.timeCount = 10.0f;
 		GreenDotController.timeCount = 10.0f;
 		YellowDotController.timeCount = 10.0f;

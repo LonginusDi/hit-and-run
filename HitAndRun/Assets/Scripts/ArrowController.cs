@@ -21,6 +21,17 @@ public class ArrowController : MonoBehaviour {
 
 	public static int hp = 0;
 	private GUIText hpGT;
+	public static int score = 0;
+	private GUIText scoreGT;
+	public static double time = 0;
+	private GUIText timeGT;	
+
+	private static int hearts = 3;
+
+	private GameObject hpGO;
+	private GameObject scoreGO;
+	private GameObject timeGO;
+
 	private float lastUpdate;
 	
 	public static int modeChooser;
@@ -30,10 +41,31 @@ public class ArrowController : MonoBehaviour {
 		moveDirection = Vector3.right;
 		lowPassValue = Input.acceleration;
 
-		hp = 100;
-		GameObject hpGO = GameObject.Find ("hp");
-		hpGT = hpGO.GetComponent<GUIText> ();
-		hpGT.text = "HP: 100";
+		if (modeChooser == 1) {
+			hpGO = GameObject.Find ("hp");
+			hpGT = hpGO.GetComponent<GUIText> ();
+
+			hp = 100;
+			
+			hpGT.text = "HP: 100";
+		}
+		if (modeChooser == 2) {
+			scoreGO = GameObject.Find ("score");
+			scoreGT = scoreGO.GetComponent<GUIText> ();
+
+			score = 0;
+			
+			scoreGT.text = "Score: 0";
+		}
+		if (modeChooser == 3) {
+			timeGO = GameObject.Find ("time");
+			timeGT = timeGO.GetComponent<GUIText> ();
+
+			time = 0.0;
+			
+			timeGT.text = "Time: 0.0";
+		}
+		
 	}
 
 	public Vector3 LowPassFilterAccelerometer() {
@@ -77,20 +109,38 @@ public class ArrowController : MonoBehaviour {
 				                  Quaternion.Euler(0, 0, targetAngle),
 			                 turnSpeed * Time.deltaTime);
 
-		//hp will reduce according to time
-		if(Time.time - lastUpdate >= 5f){
-			hp = hp - 5;
-			hpGT.text = "HP: " + hp;
-			lastUpdate = Time.time;
+
+		if (modeChooser == 1) {
+			//hp will reduce according to time
+			if(Time.time - lastUpdate >= 5f){
+				hp = hp - 5;
+				hpGT.text = "HP: " + hp;
+				lastUpdate = Time.time;
+			}
+
+			if (hp >= 200) {
+				Application.LoadLevel ("winScene");
+			}
+			if (hp <= 0) {
+				Application.LoadLevel ("failScene");
+			}
 		}
 
-		if (hp >= 200) {
-			Application.LoadLevel("winScene");
-		}
-		if (hp <= 0){
-			Application.LoadLevel("failScene");
+		if (modeChooser == 2) {
+			if (hearts <= 0) {
+				Application.LoadLevel ("failScene");
+			}
 		}
 
+		if (modeChooser == 3) {
+			time = Time.time;
+			timeGT.text = "Time: " + time;
+
+			if (hearts <= 0) {
+				Application.LoadLevel ("failScene");
+			}
+		}
+		
 		EnforceBounds();
 	}
 
@@ -106,19 +156,38 @@ public class ArrowController : MonoBehaviour {
 		if (other.CompareTag ("bubble")) {
 //			Destroy(other.gameObject);
 			other.transform.parent.GetComponent<BubbleController>().TouchedByArrow();
-			hp += 5;
-			hpGT.text = "HP: " + hp;
-			if (hp >= 200) {
-				Application.LoadLevel("winScene");
+			if(modeChooser == 1){
+				hp += 5;
+				hpGT.text = "HP: " + hp;
 			}
+			if(modeChooser == 2){
+				score += 5;
+				scoreGT.text = "Score: " + score;
+			}
+			if(modeChooser == 3){
+
+			}
+
+//			if (hp >= 200) {
+//				Application.LoadLevel("winScene");
+//			}
 		}
 		else if (other.CompareTag("reddot") && isInvincible == false){
 			StartCoroutine(Blink(1.4f));
-			hp -= 30;
-			hpGT.text = "HP: " + hp;
-			if (hp <= 0){
-				Application.LoadLevel("failScene");
+			if(modeChooser == 1){
+				hp -= 30;
+				hpGT.text = "HP: " + hp;
 			}
+			if(modeChooser == 2){
+				hearts -= 1;
+			}
+			if(modeChooser == 3){
+				hearts -= 1;
+			}
+//			hpGT.text = "HP: " + hp;
+//			if (hp <= 0){
+//				Application.LoadLevel("failScene");
+//			}
 		}
 		else if (other.CompareTag("yellowdot")){
 			moveSpeed = moveSpeed * 2;
@@ -126,16 +195,33 @@ public class ArrowController : MonoBehaviour {
 			Destroy (other);
 		}
 		else if (other.CompareTag("greendot")){
-			hp += 15;
-			hpGT.text = "HP: " + hp;
-			if (hp >= 200){
-				Application.LoadLevel("winScene");
+
+			if(modeChooser == 1){
+				hp += 15;
+				hpGT.text = "HP: " + hp;
 			}
+			if(modeChooser == 2){
+				hearts += 1;
+			}
+			if(modeChooser == 3){
+				hearts += 1;
+			}
+//			if (hp >= 200){
+//				Application.LoadLevel("winScene");
+//			}
 			Destroy (other);
 		}
 		else if (other.CompareTag("bluedot")){
 			//hp -= 15;
-			hpGT.text = "HP: " + hp;
+			if(modeChooser == 1){
+				hpGT.text = "HP: " + hp;
+			}
+			if(modeChooser == 2){
+				
+			}
+			if(modeChooser == 3){
+				
+			}
 			Destroy (other);
 		}
 	}

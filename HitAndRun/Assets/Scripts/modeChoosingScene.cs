@@ -10,12 +10,12 @@ public class modeChoosingScene : MonoBehaviour {
 	}
 
 	public void ChooseBase(){
-		modeChooser = 1;
+		ArrowController.modeChooser = 1;
 		Application.LoadLevel ("levelChoosingScene");
 	}
 
 	public void ChooseEndless(){
-		modeChooser = 2;
+		ArrowController.modeChooser = 2;
 		RedDotController.timeCount = 15.0f;
 		BlueDotController.timeCount = 10.0f;
 		GreenDotController.timeCount = 10.0f;
@@ -27,7 +27,7 @@ public class modeChoosingScene : MonoBehaviour {
 	}
 
 	public void ChooseTimeRace(){
-		modeChooser;
+		ArrowController.modeChooser = 3;
 		RedDotController.timeCount = 15.0f;
 		BlueDotController.timeCount = 10.0f;
 		GreenDotController.timeCount = 10.0f;
