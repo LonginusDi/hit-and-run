@@ -4,7 +4,7 @@ using System.Collections;
 public class UIManagerScript : MonoBehaviour {
 
 	public void Menu(){
-		Application.LoadLevel ("levelChoosingScene");
+		Application.LoadLevel ("modeChoosingScene");
 	}
 
 	public void StartGame(){
