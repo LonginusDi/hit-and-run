@@ -26,7 +26,7 @@ public class ArrowController : MonoBehaviour {
 	public static float time = 0;
 	private GUIText timeGT;	
 
-	private static double hearts = 3;
+	public static double hearts = 3;
 	private GUIText heartsGT;	
 	private GameObject heartsGO;
 	private static int countBubbles = 0;
@@ -56,7 +56,7 @@ public class ArrowController : MonoBehaviour {
 		if (modeChooser == 2) {
 			heartsGO = GameObject.Find ("hearts");
 			heartsGT = heartsGO.GetComponent<GUIText> ();
-			heartsGT.text = "Hearts: 3";
+			heartsGT.text = "Hearts: " + hearts;
 
 			scoreGO = GameObject.Find ("score");
 			scoreGT = scoreGO.GetComponent<GUIText> ();
@@ -142,13 +142,13 @@ public class ArrowController : MonoBehaviour {
 			}
 		}
 
-		if (modeChooser == 2) {
-			if (hearts <= 0) {
-				Application.LoadLevel ("failScene");
+		else if (modeChooser == 2) {
+			if (hearts <= 0.0f) {
+				Application.LoadLevel ("endSceneForEndless");
 			}
 		}
 
-		if (modeChooser == 3) {
+		else if (modeChooser == 3) {
 			time = Time.time;
 			var calTime = Mathf.Round(time * 100) / 100;
 			timeGT.text = "Time: " + calTime;
@@ -166,6 +166,12 @@ public class ArrowController : MonoBehaviour {
 		
 		EnforceBounds();
 	}
+
+//	public void fixedUpdate(){
+//		if (hearts <= 0.0f) {
+//			Application.LoadLevel ("endSceneForEndless");
+//		}
+//	}
 
 	public void SetColliderForSprite( int spriteNum )
 	{
@@ -208,17 +214,16 @@ public class ArrowController : MonoBehaviour {
 		}
 		else if (other.CompareTag("reddot") && isInvincible == false){
 			StartCoroutine(Blink(1f));
-			if(modeChooser == 1){
+			if(modeChooser == 1 || modeChooser == 3){
 				hp -= 30;
 				hpGT.text = "HP: " + hp;
 			}
-			if(modeChooser == 2){
+			else{
 				hearts -= 1;
 				heartsGT.text = "Hearts: " + hearts;
-			}
-			if(modeChooser == 3){
-				hp += 5;
-				hpGT.text = "HP: " + hp;
+//				if (hearts <= 0) {
+//					Application.LoadLevel ("endSceneForEndless");
+//				}
 			}
 //			hpGT.text = "HP: " + hp;
 //			if (hp <= 0){
