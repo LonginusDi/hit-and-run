@@ -52,6 +52,7 @@ public class ArrowController : MonoBehaviour {
 			
 			hpGT.text = "HP: 100";
 		}
+
 		if (modeChooser == 2) {
 			heartsGO = GameObject.Find ("hearts");
 			heartsGT = heartsGO.GetComponent<GUIText> ();
@@ -64,6 +65,7 @@ public class ArrowController : MonoBehaviour {
 			
 			scoreGT.text = "Score: 0";
 		}
+
 		if (modeChooser == 3) {
 			hpGO = GameObject.Find ("hp");
 			hpGT = hpGO.GetComponent<GUIText> ();
@@ -194,8 +196,10 @@ public class ArrowController : MonoBehaviour {
 				}
 			}
 			if(modeChooser == 3){
-				hp += 5;
-				hpGT.text = "HP: " + hp;
+				if(hp <= 190){
+					hp += 5;
+					hpGT.text = "HP: " + hp;
+				}
 			}
 
 //			if (hp >= 200) {
