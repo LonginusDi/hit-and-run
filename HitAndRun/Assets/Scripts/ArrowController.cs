@@ -26,7 +26,7 @@ public class ArrowController : MonoBehaviour {
 	public static float time = 0;
 	private GUIText timeGT;	
 
-	private static int hearts = 3;
+	private static double hearts = 3;
 	private GUIText heartsGT;	
 	private GameObject heartsGO;
 	private static int countBubbles = 0;
@@ -187,7 +187,7 @@ public class ArrowController : MonoBehaviour {
 
 				countBubbles += 1;
 
-				if(countBubbles >= 10){
+				if(countBubbles >= 15){
 					hearts += 1;
 					heartsGT.text = "Hearts: " + hearts;
 					countBubbles = 0;
@@ -233,7 +233,7 @@ public class ArrowController : MonoBehaviour {
 				hpGT.text = "HP: " + hp;
 			}
 			if(modeChooser == 2){
-				hearts += 1;
+				hearts += 0.5;
 				heartsGT.text = "Hearts: " + hearts;
 			}
 			if(modeChooser == 3){
