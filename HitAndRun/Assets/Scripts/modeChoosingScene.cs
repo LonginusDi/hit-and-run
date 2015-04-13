@@ -21,8 +21,6 @@ public class modeChoosingScene : MonoBehaviour {
 		GreenDotController.timeCount = 10.0f;
 		YellowDotController.timeCount = 10.0f;
 
-
-
 		Application.LoadLevel ("mainScene");
 	}
 

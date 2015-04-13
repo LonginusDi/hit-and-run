@@ -23,10 +23,13 @@ public class ArrowController : MonoBehaviour {
 	private GUIText hpGT;
 	public static int score = 0;
 	private GUIText scoreGT;
-	public static double time = 0;
+	public static float time = 0;
 	private GUIText timeGT;	
 
 	private static int hearts = 3;
+	private GUIText heartsGT;	
+	private GameObject heartsGO;
+	private static int countBubbles = 0;
 
 	private GameObject hpGO;
 	private GameObject scoreGO;
@@ -50,6 +53,10 @@ public class ArrowController : MonoBehaviour {
 			hpGT.text = "HP: 100";
 		}
 		if (modeChooser == 2) {
+			heartsGO = GameObject.Find ("hearts");
+			heartsGT = heartsGO.GetComponent<GUIText> ();
+			heartsGT.text = "Hearts: 3";
+
 			scoreGO = GameObject.Find ("score");
 			scoreGT = scoreGO.GetComponent<GUIText> ();
 
@@ -58,10 +65,17 @@ public class ArrowController : MonoBehaviour {
 			scoreGT.text = "Score: 0";
 		}
 		if (modeChooser == 3) {
+			hpGO = GameObject.Find ("hp");
+			hpGT = hpGO.GetComponent<GUIText> ();
+			
+			hp = 100;
+			
+			hpGT.text = "HP: 100";
+
 			timeGO = GameObject.Find ("time");
 			timeGT = timeGO.GetComponent<GUIText> ();
 
-			time = 0.0;
+			time = 0;
 			
 			timeGT.text = "Time: 0.0";
 		}
@@ -134,9 +148,16 @@ public class ArrowController : MonoBehaviour {
 
 		if (modeChooser == 3) {
 			time = Time.time;
-			timeGT.text = "Time: " + time;
+			var calTime = Mathf.Round(time * 100) / 100;
+			timeGT.text = "Time: " + calTime;
 
-			if (hearts <= 0) {
+			if(Time.time - lastUpdate >= 5f){
+				hp = hp - 5;
+				hpGT.text = "HP: " + hp;
+				lastUpdate = Time.time;
+			}
+			
+			if (hp <= 0) {
 				Application.LoadLevel ("failScene");
 			}
 		}
@@ -163,9 +184,18 @@ public class ArrowController : MonoBehaviour {
 			if(modeChooser == 2){
 				score += 5;
 				scoreGT.text = "Score: " + score;
+
+				countBubbles += 1;
+
+				if(countBubbles >= 10){
+					hearts += 1;
+					heartsGT.text = "Hearts: " + hearts;
+					countBubbles = 0;
+				}
 			}
 			if(modeChooser == 3){
-
+				hp += 5;
+				hpGT.text = "HP: " + hp;
 			}
 
 //			if (hp >= 200) {
@@ -180,9 +210,11 @@ public class ArrowController : MonoBehaviour {
 			}
 			if(modeChooser == 2){
 				hearts -= 1;
+				heartsGT.text = "Hearts: " + hearts;
 			}
 			if(modeChooser == 3){
-				hearts -= 1;
+				hp += 5;
+				hpGT.text = "HP: " + hp;
 			}
 //			hpGT.text = "HP: " + hp;
 //			if (hp <= 0){
@@ -202,9 +234,11 @@ public class ArrowController : MonoBehaviour {
 			}
 			if(modeChooser == 2){
 				hearts += 1;
+				heartsGT.text = "Hearts: " + hearts;
 			}
 			if(modeChooser == 3){
-				hearts += 1;
+				hp += 15;
+				hpGT.text = "HP: " + hp;
 			}
 //			if (hp >= 200){
 //				Application.LoadLevel("winScene");
@@ -220,7 +254,7 @@ public class ArrowController : MonoBehaviour {
 				
 			}
 			if(modeChooser == 3){
-				
+				hpGT.text = "HP: " + hp;
 			}
 			Destroy (other);
 		}
