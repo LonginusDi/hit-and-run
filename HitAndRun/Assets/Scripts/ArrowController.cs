@@ -203,7 +203,7 @@ public class ArrowController : MonoBehaviour {
 //			}
 		}
 		else if (other.CompareTag("reddot") && isInvincible == false){
-			StartCoroutine(Blink(1.4f));
+			StartCoroutine(Blink(1f));
 			if(modeChooser == 1){
 				hp -= 30;
 				hpGT.text = "HP: " + hp;
