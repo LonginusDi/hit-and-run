@@ -67,7 +67,7 @@ public class BlueDotController : MonoBehaviour {
 			GetComponent<Animator>().SetBool( "IsTouched", true );
 			EliminateRedDots = true;
 			Vector3 scale = transform.localScale;
-			scale = scale * 3;
+			scale = scale * 10;
 			transform.localScale = scale;
 			speed = 0.0f;
 //			StartCoroutine(EliminateRedDots(1.0f));

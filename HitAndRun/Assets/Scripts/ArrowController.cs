@@ -100,18 +100,18 @@ public class ArrowController : MonoBehaviour {
 		}
 
 //		mouse
-		Vector3 moveToward = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		moveDirection = moveToward - currentPosition;
-		moveDirection.z = 0;
-		moveDirection.Normalize();
+//		Vector3 moveToward = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+//		moveDirection = moveToward - currentPosition;
+//		moveDirection.z = 0;
+//		moveDirection.Normalize();
 
 
 		//Accelerometer
-//			moveDirection = new Vector3(Input.acceleration.x, Input.acceleration.y, 0);
-//			moveDirection.z = 0;
-//			moveDirection.Normalize();
-//		moveSpeed = Mathf.Sqrt (Mathf.Pow (Input.acceleration.x, 2) + Mathf.Pow (Input.acceleration.y, 2)) * smooth;
-//		moveSpeed *= Time.deltaTime;
+			moveDirection = new Vector3(Input.acceleration.x, Input.acceleration.y, 0);
+			moveDirection.z = 0;
+			moveDirection.Normalize();
+		moveSpeed = Mathf.Sqrt (Mathf.Pow (Input.acceleration.x, 2) + Mathf.Pow (Input.acceleration.y, 2)) * smooth;
+		moveSpeed *= Time.deltaTime;
 
 
 
@@ -135,15 +135,18 @@ public class ArrowController : MonoBehaviour {
 			}
 
 			if (hp >= 200) {
+				isInvincible = false;
 				Application.LoadLevel ("winScene");
 			}
 			if (hp <= 0) {
+				isInvincible = false;
 				Application.LoadLevel ("failScene");
 			}
 		}
 
 		else if (modeChooser == 2) {
 			if (hearts <= 0.0f) {
+				isInvincible = false;
 				Application.LoadLevel ("endSceneForEndless");
 			}
 		}
@@ -160,6 +163,7 @@ public class ArrowController : MonoBehaviour {
 			}
 			
 			if (hp <= 0) {
+				isInvincible = false;
 				Application.LoadLevel ("failScene");
 			}
 		}
@@ -218,12 +222,9 @@ public class ArrowController : MonoBehaviour {
 				hp -= 30;
 				hpGT.text = "HP: " + hp;
 			}
-			else{
+			else if(modeChooser == 2){
 				hearts -= 1;
 				heartsGT.text = "Hearts: " + hearts;
-//				if (hearts <= 0) {
-//					Application.LoadLevel ("endSceneForEndless");
-//				}
 			}
 //			hpGT.text = "HP: " + hp;
 //			if (hp <= 0){

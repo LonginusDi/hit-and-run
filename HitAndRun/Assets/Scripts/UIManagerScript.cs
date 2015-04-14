@@ -11,7 +11,6 @@ public class UIManagerScript : MonoBehaviour {
 		ArrowController.hearts = 3;
 		ArrowController.time = 0;
 		ArrowController.score = 0;
-
 		Application.LoadLevel ("mainScene");
 	}
 }

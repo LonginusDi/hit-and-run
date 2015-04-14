@@ -75,7 +75,7 @@ public class BubbleController : MonoBehaviour {
 			Instantiate(redDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle1 + random));
 
 		}
-		if (Random.Range (0, 100) > 90) {
+		if (Random.Range (0, 100) > 0) {
 			
 			Instantiate(blueDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle2 + random));
 		} else {
