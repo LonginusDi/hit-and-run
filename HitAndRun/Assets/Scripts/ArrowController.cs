@@ -7,6 +7,8 @@ public class ArrowController : MonoBehaviour {
 	public float turnSpeed ;
 	private float smooth = 150.0f;
 
+	public bool useMouse;
+
 	public static bool isInvincible = false;
 
 	private float speedUpTime = 0.0f;
@@ -100,18 +102,20 @@ public class ArrowController : MonoBehaviour {
 		}
 
 //		mouse
-//		Vector3 moveToward = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-//		moveDirection = moveToward - currentPosition;
-//		moveDirection.z = 0;
-//		moveDirection.Normalize();
-
-
+		if (useMouse == true) {
+		Vector3 moveToward = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		moveDirection = moveToward - currentPosition;
+		moveDirection.z = 0;
+		moveDirection.Normalize();
+		}
+		else{
 		//Accelerometer
 			moveDirection = new Vector3(Input.acceleration.x, Input.acceleration.y, 0);
 			moveDirection.z = 0;
 			moveDirection.Normalize();
-		moveSpeed = Mathf.Sqrt (Mathf.Pow (Input.acceleration.x, 2) + Mathf.Pow (Input.acceleration.y, 2)) * smooth;
-		moveSpeed *= Time.deltaTime;
+			moveSpeed = Mathf.Sqrt (Mathf.Pow (Input.acceleration.x, 2) + Mathf.Pow (Input.acceleration.y, 2)) * smooth;
+			moveSpeed *= Time.deltaTime;
+		}
 
 
 
