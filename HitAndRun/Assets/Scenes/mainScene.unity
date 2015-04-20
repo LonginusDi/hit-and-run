@@ -639,7 +639,6 @@ GameObject:
   - 212: {fileID: 2109726367}
   - 114: {fileID: 2109726369}
   - 60: {fileID: 2109726370}
-  - 114: {fileID: 2109726371}
   - 95: {fileID: 2109726372}
   - 50: {fileID: 2109726373}
   m_Layer: 8
@@ -696,6 +695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   turnSpeed: 5
+  useMouse: 0
   colliders:
   - {fileID: 2109726370}
 --- !u!60 &2109726370
@@ -753,20 +753,6 @@ PolygonCollider2D:
       - {x: .144931018, y: -.0733523965}
       - {x: .151783586, y: -.363019884}
       - {x: .220097482, y: -.289647371}
---- !u!114 &2109726371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2109726366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 300d0ad7adcd244acb7e1de515e6af4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 0
-  turnSpeed: 1
-  colliders: []
 --- !u!95 &2109726372
 Animator:
   serializedVersion: 3

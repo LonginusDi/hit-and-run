@@ -270,7 +270,7 @@ public class ArrowController : MonoBehaviour {
 			if(modeChooser == 3){
 				hpGT.text = "HP: " + hp;
 			}
-			Destroy (other);
+//			Destroy (other);
 		}
 	}
 
