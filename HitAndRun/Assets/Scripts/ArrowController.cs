@@ -27,6 +27,7 @@ public class ArrowController : MonoBehaviour {
 	private GUIText scoreGT;
 	public static float time = 0;
 	private GUIText timeGT;	
+	public static float startTime;
 
 	public static double hearts = 3;
 	private GUIText heartsGT;	
@@ -80,7 +81,7 @@ public class ArrowController : MonoBehaviour {
 
 			timeGO = GameObject.Find ("time");
 			timeGT = timeGO.GetComponent<GUIText> ();
-
+			startTime = Time.time;
 			time = 0;
 			
 			timeGT.text = "Time: 0.0";
@@ -159,9 +160,21 @@ public class ArrowController : MonoBehaviour {
 		}
 
 		else if (modeChooser == 3) {
-			time = Time.time;
-			var calTime = Mathf.Round(time * 100) / 100;
-			timeGT.text = "Time: " + calTime;
+			time = Time.time - startTime;
+			string minutes = Mathf.Floor(time / 60).ToString("00");
+			string seconds = (time % 60).ToString("00");
+			string miliseconds = Mathf.Floor((time*100) % 100).ToString("00");
+			
+//			if(minutes < 10) { minutes = "0" + minutes.ToString(); } 
+//			if(seconds < 10) { seconds = "0" + Mathf.RoundToInt(seconds).ToString(); } 
+//			GUI.Label(new Rect(10,10,250,100), minutes + ":" + seconds);
+//			var calTime = Mathf.Round(time * 100) / 100;
+			if(Mathf.Floor(time / 60) > 0 ){
+				timeGT.text = "Time: " + minutes + ":" + seconds + "." + miliseconds;
+			}
+			else{
+				timeGT.text = "Time: " + seconds + "." + miliseconds;
+			}
 
 			if(Time.time - lastUpdate >= 5f){
 				hp = hp - 10;

@@ -11,11 +11,13 @@ public class modeChoosingScene : MonoBehaviour {
 
 	public void ChooseBase(){
 		ArrowController.modeChooser = 1;
+		BubbleCreator.numberOfBubbles = 0;
 		Application.LoadLevel ("levelChoosingScene");
 	}
 
 	public void ChooseEndless(){
 		ArrowController.modeChooser = 2;
+		BubbleCreator.numberOfBubbles = 0;
 		RedDotController.timeCount = 15.0f;
 		BlueDotController.timeCount = 10.0f;
 		GreenDotController.timeCount = 10.0f;
@@ -27,11 +29,12 @@ public class modeChoosingScene : MonoBehaviour {
 
 	public void ChooseTimeRace(){
 		ArrowController.modeChooser = 3;
+		ArrowController.startTime = Time.time;
+		BubbleCreator.numberOfBubbles = 0;
 		RedDotController.timeCount = 15.0f;
 		BlueDotController.timeCount = 10.0f;
 		GreenDotController.timeCount = 10.0f;
 		YellowDotController.timeCount = 10.0f;
-
 		Application.LoadLevel ("mainScene");
 	}
 

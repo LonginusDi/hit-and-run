@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class BlueDotController : MonoBehaviour {
-	public float speed = 0.05f;
+	public float speed = 0.02f;
 	private float xMax;
 	private float yMax;
 	private Vector3 moveDirection;
