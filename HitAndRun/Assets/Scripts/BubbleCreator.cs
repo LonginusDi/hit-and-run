@@ -33,6 +33,7 @@ public class BubbleCreator: MonoBehaviour {
 		if (numberOfBubbles < 18) {
 			Invoke ("SpawnBubble", Random.Range (minSpawnTime / pastTime, maxSpawnTime / pastTime));
 			numberOfBubbles++;
+//			Debug.Log("number of bubbles " + numberOfBubbles);
 		}
 	}
 }
