@@ -41,6 +41,8 @@ public class ArrowController : MonoBehaviour {
 	
 	public static int modeChooser;
 
+	public GameObject effectPrefab;
+
 	// Use this for initialization
 	void Start () {
 		moveDirection = Vector3.right;
@@ -133,8 +135,9 @@ public class ArrowController : MonoBehaviour {
 		if (modeChooser == 1) {
 			//hp will reduce according to time
 			if(Time.time - lastUpdate >= 5f){
-				hp = hp - 5;
+				hp = hp - 10;
 				hpGT.text = "HP: " + hp;
+				setEffectText("-10", Color.red, gameObject);
 				lastUpdate = Time.time;
 			}
 
@@ -161,8 +164,9 @@ public class ArrowController : MonoBehaviour {
 			timeGT.text = "Time: " + calTime;
 
 			if(Time.time - lastUpdate >= 5f){
-				hp = hp - 5;
+				hp = hp - 10;
 				hpGT.text = "HP: " + hp;
+				setEffectText("-10", Color.red, gameObject);
 				lastUpdate = Time.time;
 			}
 			
@@ -193,12 +197,17 @@ public class ArrowController : MonoBehaviour {
 		if (other.CompareTag ("bubble")) {
 //			Destroy(other.gameObject);
 			other.transform.parent.GetComponent<BubbleController>().TouchedByArrow();
+			Vector3 dotPos = Camera.main.WorldToViewportPoint(other.transform.position);
 			if(modeChooser == 1){
-				hp += 5;
+				hp += 10;
 				hpGT.text = "HP: " + hp;
+//				effectPrefab.guiText.text = "+10";
+//				effectPrefab.guiText.color = Color.green;
+//				Instantiate(effectPrefab, dotPos, Quaternion.identity);
+				setEffectText("+10", Color.green, other.gameObject);
 			}
 			if(modeChooser == 2){
-				score += 5;
+				score += 10;
 				scoreGT.text = "Score: " + score;
 
 				countBubbles += 1;
@@ -211,8 +220,9 @@ public class ArrowController : MonoBehaviour {
 			}
 			if(modeChooser == 3){
 				if(hp <= 190){
-					hp += 5;
+					hp += 10;
 					hpGT.text = "HP: " + hp;
+					setEffectText("+10", Color.green, other.gameObject);
 				}
 			}
 
@@ -225,10 +235,12 @@ public class ArrowController : MonoBehaviour {
 			if(modeChooser == 1 || modeChooser == 3){
 				hp -= 30;
 				hpGT.text = "HP: " + hp;
+				setEffectText("-30", Color.red, other.gameObject);
 			}
 			else if(modeChooser == 2){
 				hearts -= 1;
 				heartsGT.text = "Hearts: " + hearts;
+				setEffectText("Heart -1", Color.red, other.gameObject);
 			}
 //			hpGT.text = "HP: " + hp;
 //			if (hp <= 0){
@@ -237,22 +249,26 @@ public class ArrowController : MonoBehaviour {
 		}
 		else if (other.CompareTag("yellowdot")){
 			moveSpeed = moveSpeed * 2;
+			setEffectText("Speedup!", Color.yellow, other.gameObject);
 			speedUpTime = Time.time;
 			Destroy (other);
 		}
 		else if (other.CompareTag("greendot")){
 
 			if(modeChooser == 1){
-				hp += 15;
+				hp += 30;
 				hpGT.text = "HP: " + hp;
+				setEffectText("+30", Color.green, other.gameObject);
 			}
 			if(modeChooser == 2){
-				hearts += 0.5;
+				hearts += 1;
 				heartsGT.text = "Hearts: " + hearts;
+				setEffectText("Heart+1", Color.green, other.gameObject);
 			}
 			if(modeChooser == 3){
-				hp += 15;
+				hp += 30;
 				hpGT.text = "HP: " + hp;
+				setEffectText("+30", Color.green, other.gameObject);
 			}
 //			if (hp >= 200){
 //				Application.LoadLevel("winScene");
@@ -310,4 +326,14 @@ public class ArrowController : MonoBehaviour {
 		}
 		isInvincible = false;
 	}
-}
+
+	private void setEffectText(string text, Color color, GameObject go){
+		
+		effectPrefab.guiText.text = text;
+		effectPrefab.guiText.color = color;
+		Vector3 dotPos = Camera.main.WorldToViewportPoint (go.transform.position);
+		Instantiate (effectPrefab, dotPos, Quaternion.identity);
+	}
+		
+	}
+	

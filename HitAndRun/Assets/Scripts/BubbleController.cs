@@ -57,6 +57,7 @@ public class BubbleController : MonoBehaviour {
 	}
 
 	public void BubbleDisappear(){
+		BubbleCreator.numberOfBubbles--;
 		CreateRedDot ();
 		DestroyObject (gameObject);
 	}

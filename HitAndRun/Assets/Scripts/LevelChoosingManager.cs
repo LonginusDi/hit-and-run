@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LevelChoosingManager : MonoBehaviour {
 	public void ChooseEasy(){
-		RedDotController.timeCount = Mathf.Infinity;
+		RedDotController.timeCount = 5.0f;
 		BlueDotController.timeCount = Mathf.Infinity;
 		GreenDotController.timeCount = Mathf.Infinity;
 		YellowDotController.timeCount = Mathf.Infinity;
@@ -12,9 +12,9 @@ public class LevelChoosingManager : MonoBehaviour {
 
 	public void ChooseMedium(){		
 		RedDotController.timeCount = 15.0f;
-		BlueDotController.timeCount = 10.0f;
-		GreenDotController.timeCount = 10.0f;
-		YellowDotController.timeCount = 10.0f;
+		BlueDotController.timeCount = 30.0f;
+		GreenDotController.timeCount = 30.0f;
+		YellowDotController.timeCount = 30.0f;
 		StartGame ();
 	}
 
