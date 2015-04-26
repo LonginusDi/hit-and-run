@@ -8,7 +8,6 @@ public class endSceneController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
 	}
 	
 	// Update is called once per frame
@@ -16,5 +15,6 @@ public class endSceneController : MonoBehaviour {
 		statementGO = GameObject.Find ("endStatement");
 		statementGT = statementGO.GetComponent<GUIText> ();
 		statementGT.text = "You scored " + ArrowController.score + " points!";
+
 	}
 }

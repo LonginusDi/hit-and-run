@@ -1,7 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-
 public class UIManagerScript : MonoBehaviour {
+//	private FB fb;
+
+
+	void Start(){
+//		SoomlaProfile.Initialize ();
+//		FB.Init(onInitComplete:"", onHideUnity:null);
+	}
 
 	public void Menu(){
 		Application.LoadLevel ("modeChoosingScene");
@@ -14,4 +20,5 @@ public class UIManagerScript : MonoBehaviour {
 		BubbleCreator.numberOfBubbles = 0;
 		Application.LoadLevel ("mainScene");
 	}
+
 }
