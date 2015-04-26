@@ -5,7 +5,7 @@ public class ArrowController : MonoBehaviour {
 	public float moveSpeed = 2.0f;
 	private Vector3 moveDirection;
 	public float turnSpeed ;
-	private float smooth = 150.0f;
+	private float smooth = 850.0f;
 
 	public bool useMouse;
 
@@ -90,7 +90,7 @@ public class ArrowController : MonoBehaviour {
 	}
 
 	public Vector3 LowPassFilterAccelerometer() {
-		lowPassValue = new Vector3(Mathf.Lerp(lowPassValue.x, Input.acceleration.y, LowPassFilterFactor), Mathf.Lerp(lowPassValue.y, -Input.acceleration.x, LowPassFilterFactor), 0);
+		lowPassValue = Vector3.Lerp(lowPassValue, Input.acceleration, LowPassFilterFactor);;
 		return lowPassValue;
 	}
 
@@ -99,27 +99,33 @@ public class ArrowController : MonoBehaviour {
 	void Update () {
 		Vector3 currentPosition = transform.position;
 		
-		if (speedUpTime != 0 && Time.time - speedUpTime > 5) {
-			speedUpTime = 0.0f;
-			moveSpeed = moveSpeed / 2;
-		}
+
 
 //		mouse
 		if (useMouse == true) {
-		Vector3 moveToward = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		moveDirection = moveToward - currentPosition;
-		moveDirection.z = 0;
-		moveDirection.Normalize();
-		}
-		else{
+			Vector3 moveToward = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			moveDirection = moveToward - currentPosition;
+			moveDirection.z = 0;
+			moveDirection.Normalize();
+			if (speedUpTime != 0 && Time.time - speedUpTime > 5) {
+				speedUpTime = 0.0f;
+				moveSpeed = moveSpeed / 2;
+			}
+		} else{
 		//Accelerometer
 			moveDirection = new Vector3(Input.acceleration.x, Input.acceleration.y, 0);
 			moveDirection.z = 0;
 			moveDirection.Normalize();
-			moveSpeed = Mathf.Sqrt (Mathf.Pow (Input.acceleration.x, 2) + Mathf.Pow (Input.acceleration.y, 2)) * smooth;
+			Vector3 filteredSpeed = LowPassFilterAccelerometer ();
+			moveSpeed = Mathf.Sqrt (Mathf.Pow (filteredSpeed.x, 2) + Mathf.Pow (filteredSpeed.y, 2)) * smooth;
 			moveSpeed *= Time.deltaTime;
+			if (speedUpTime != 0 && Time.time - speedUpTime <= 5) {
+				moveSpeed = moveSpeed * 2;
+			}
+			else if (speedUpTime != 0 && Time.time - speedUpTime > 5) {
+				speedUpTime = 0.0f;
+			}
 		}
-
 
 
 		Vector3 target = moveDirection * moveSpeed + currentPosition;

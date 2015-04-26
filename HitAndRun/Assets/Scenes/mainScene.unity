@@ -696,7 +696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   turnSpeed: 5
-  useMouse: 1
+  useMouse: 0
   colliders:
   - {fileID: 2109726370}
   effectPrefab: {fileID: 196774, guid: ee270f505ea124a48bfac1891972a758, type: 2}
