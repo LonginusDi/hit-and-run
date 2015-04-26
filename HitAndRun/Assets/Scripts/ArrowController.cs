@@ -5,7 +5,7 @@ public class ArrowController : MonoBehaviour {
 	public float moveSpeed = 2.0f;
 	private Vector3 moveDirection;
 	public float turnSpeed ;
-	private float smooth = 850.0f;
+	private float smooth = 650.0f;
 
 	public bool useMouse;
 
