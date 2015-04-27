@@ -46,6 +46,10 @@ public class ArrowController : MonoBehaviour {
 
 	public GameObject effectPrefab;
 
+	public AudioClip bubbleContactSound;
+	public AudioClip redDotContactSound;
+
+
 	// Use this for initialization
 	void Start () {
 		moveDirection = Vector3.right;
@@ -224,6 +228,8 @@ public class ArrowController : MonoBehaviour {
 	{
 		if (other.CompareTag ("bubble")) {
 //			Destroy(other.gameObject);
+			audio.PlayOneShot(bubbleContactSound);
+
 			other.transform.parent.GetComponent<BubbleController>().TouchedByArrow();
 			Vector3 dotPos = Camera.main.WorldToViewportPoint(other.transform.position);
 			if(modeChooser == 1){
@@ -262,6 +268,8 @@ public class ArrowController : MonoBehaviour {
 //			}
 		}
 		else if (other.CompareTag("reddot") && isInvincible == false){
+			audio.PlayOneShot(redDotContactSound);
+
 			StartCoroutine(Blink(1f));
 			if(modeChooser == 1 || modeChooser == 3){
 				hp -= 30;
