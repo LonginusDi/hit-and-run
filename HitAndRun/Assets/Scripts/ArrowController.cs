@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class ArrowController : MonoBehaviour {
@@ -24,11 +25,11 @@ public class ArrowController : MonoBehaviour {
 	private Vector3 lowPassValue = Vector3.zero;
 
 	public static int hp = 0;
-	private GUIText hpGT;
+	private Text hpGT;
 	public static int score = 0;
-	private GUIText scoreGT;
+	private Text scoreGT;
 	public static float time = 0;
-	private GUIText timeGT;	
+	private Text timeGT;	
 	public static float startTime;
 
 	public static double hearts = 3;
@@ -36,9 +37,10 @@ public class ArrowController : MonoBehaviour {
 	private GameObject heartsGO;
 	private static int countBubbles = 0;
 
-	private GameObject hpGO;
-	private GameObject scoreGO;
-	private GameObject timeGO;
+	private Transform hpGO;
+	private Transform scoreGO;
+	private Transform timeGO;
+	private GameObject canvasGO;
 
 	private float lastUpdate;
 	
@@ -54,10 +56,12 @@ public class ArrowController : MonoBehaviour {
 	void Start () {
 		moveDirection = Vector3.right;
 		lowPassValue = Input.acceleration;
-
+		canvasGO = GameObject.Find ("Canvas");
+//		Transform gt = canvas.transform.FindChild("hp");
+//		Text tt = gt.GetComponent<Text> ();
 		if (modeChooser == 1) {
-			hpGO = GameObject.Find ("hp");
-			hpGT = hpGO.GetComponent<GUIText> ();
+			hpGO = canvasGO.transform.Find ("hp");
+			hpGT = hpGO.GetComponent<Text> ();
 
 			hp = 100;
 			
@@ -76,8 +80,8 @@ public class ArrowController : MonoBehaviour {
 				GameObject newHeartPrefab = Instantiate(heartPrefab, newHeartPos, Quaternion.identity) as GameObject;
 				heartArray.Add(newHeartPrefab);
 			}
-			scoreGO = GameObject.Find ("score");
-			scoreGT = scoreGO.GetComponent<GUIText> ();
+			scoreGO = canvasGO.transform.Find ("score");
+			scoreGT = scoreGO.GetComponent<Text> ();
 
 			score = 0;
 			
@@ -85,15 +89,15 @@ public class ArrowController : MonoBehaviour {
 		}
 
 		if (modeChooser == 3) {
-			hpGO = GameObject.Find ("hp");
-			hpGT = hpGO.GetComponent<GUIText> ();
+			hpGO = canvasGO.transform.Find ("hp");
+			hpGT = hpGO.GetComponent<Text> ();
 			
 			hp = 100;
 			
 			hpGT.text = "HP: 100";
 
-			timeGO = GameObject.Find ("time");
-			timeGT = timeGO.GetComponent<GUIText> ();
+			timeGO = canvasGO.transform.Find ("time");
+			timeGT = timeGO.GetComponent<Text> ();
 			startTime = Time.time;
 			time = 0;
 			

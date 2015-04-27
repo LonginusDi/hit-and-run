@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class endSceneController : MonoBehaviour {
 
-	private GUIText statementGT;	
-	private GameObject statementGO;
+	private Text statementGT;	
+	private Transform statementGO;
+	private GameObject canvasGO;
 
 	// Use this for initialization
 	void Start () {
@@ -12,9 +14,10 @@ public class endSceneController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		statementGO = GameObject.Find ("endStatement");
-		statementGT = statementGO.GetComponent<GUIText> ();
-		statementGT.text = "You scored " + ArrowController.score + " points!";
+		canvasGO = GameObject.Find ("Canvas");
+		statementGO = canvasGO.transform.Find ("endStatement");
+		statementGT = statementGO.GetComponent<Text> ();
+		statementGT.text = "Congratulations! \nYou scored " + ArrowController.score + " points!";
 
 	}
 }
