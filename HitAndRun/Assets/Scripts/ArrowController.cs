@@ -15,6 +15,8 @@ public class ArrowController : MonoBehaviour {
 	public static bool isInvincible = false;
 
 	private float speedUpTime = 0.0f;
+	private float speedDownTime = 0.0f;
+
 	[SerializeField]
 	private PolygonCollider2D[] colliders;
 	private int currentColliderIndex = 0;
@@ -53,6 +55,7 @@ public class ArrowController : MonoBehaviour {
 	public AudioClip greenContactSound;
 	public AudioClip blueContactSound;
 	public AudioClip yellowContactSound;
+	public AudioClip iceContactSound;
 
 	// Use this for initialization
 	void Start () {
@@ -130,6 +133,10 @@ public class ArrowController : MonoBehaviour {
 				speedUpTime = 0.0f;
 				moveSpeed = moveSpeed / 2;
 			}
+			if (speedDownTime != 0 && Time.time - speedDownTime > 5) {
+				speedDownTime = 0.0f;
+				moveSpeed = moveSpeed * 2;
+			}
 		} else{
 		//Accelerometer
 			moveDirection = new Vector3(Input.acceleration.x, Input.acceleration.y, 0);
@@ -143,6 +150,12 @@ public class ArrowController : MonoBehaviour {
 			}
 			else if (speedUpTime != 0 && Time.time - speedUpTime > 5) {
 				speedUpTime = 0.0f;
+			}
+			if (speedDownTime != 0 && Time.time - speedDownTime <= 5) {
+				moveSpeed = moveSpeed / 2;
+			}
+			else if (speedDownTime != 0 && Time.time - speedDownTime > 5) {
+				speedDownTime = 0.0f;
 			}
 		}
 
@@ -347,6 +360,14 @@ public class ArrowController : MonoBehaviour {
 				hpGT.text = "HP: " + hp;
 			}
 //			Destroy (other);
+		}
+		else if (other.CompareTag("icedot")){
+			audio.PlayOneShot(iceContactSound);
+			
+			moveSpeed = moveSpeed*0.5f;
+			setEffectText("Slowdown!", Color.white, other.gameObject);
+			speedDownTime = Time.time;
+			Destroy (other);
 		}
 	}
 

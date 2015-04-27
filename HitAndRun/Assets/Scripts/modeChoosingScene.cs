@@ -27,6 +27,7 @@ public class modeChoosingScene : MonoBehaviour {
 		BlueDotController.timeCount = 10.0f;
 		GreenDotController.timeCount = 10.0f;
 		YellowDotController.timeCount = 10.0f;
+		IceDotController.timeCount = 10.0f;
 		ArrowController.hearts = 3;
 
 		Application.LoadLevel ("mainScene");
@@ -42,6 +43,8 @@ public class modeChoosingScene : MonoBehaviour {
 		BlueDotController.timeCount = 10.0f;
 		GreenDotController.timeCount = 10.0f;
 		YellowDotController.timeCount = 10.0f;
+		IceDotController.timeCount = 10.0f;
+
 		Application.LoadLevel ("mainScene");
 	}
 

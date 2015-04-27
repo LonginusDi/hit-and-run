@@ -17,6 +17,8 @@ public class BubbleController : MonoBehaviour {
 	public GameObject greenDotPrefab;
 	public GameObject yellowDotPrefab;
 	public GameObject blueDotPrefab;
+	public GameObject iceDotPrefab;
+
 	// Use this for initialization
 	void Start () {
 		myCamera = Camera.main;
@@ -91,9 +93,9 @@ public class BubbleController : MonoBehaviour {
 			Instantiate(redDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle3 + random));
 			
 		}
-		if (Random.Range (0, 100) > 90) {
+		if (Random.Range (0, 100) > 85) {
 			
-			Instantiate(blueDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle4 + random));
+			Instantiate(iceDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle4 + random));
 		} else {
 			Instantiate(redDotPrefab, dotPos, Quaternion.Euler(0, 0, targetAngle4 + random));
 			

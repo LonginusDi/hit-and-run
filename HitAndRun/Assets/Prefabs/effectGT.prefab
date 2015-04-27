@@ -64,7 +64,7 @@ GUIText:
   m_GameObject: {fileID: 196774}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: +30
+  m_Text: Heart -1
   m_Anchor: 4
   m_Alignment: 1
   m_PixelOffset: {x: 0, y: 0}
@@ -76,7 +76,7 @@ GUIText:
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
-    rgba: 4278255360
+    rgba: 4278190335
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!1001 &100100000

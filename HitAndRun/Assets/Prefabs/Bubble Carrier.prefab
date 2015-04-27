@@ -128,6 +128,7 @@ MonoBehaviour:
   greenDotPrefab: {fileID: 183266, guid: 622ad312fe8c04b29a2aa0512c94510c, type: 2}
   yellowDotPrefab: {fileID: 149176, guid: 969af59d2184742358d389449ae8dca5, type: 2}
   blueDotPrefab: {fileID: 144026, guid: dd2274922415f4b319af3a0fcfd36b5b, type: 2}
+  iceDotPrefab: {fileID: 117332, guid: 573266681cfbb4c77a3ceacf01cc1387, type: 2}
 --- !u!212 &21242114
 SpriteRenderer:
   m_ObjectHideFlags: 1

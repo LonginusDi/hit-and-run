@@ -694,6 +694,7 @@ GameObject:
   - 82: {fileID: 2109726377}
   - 82: {fileID: 2109726376}
   - 82: {fileID: 2109726375}
+  - 82: {fileID: 2109726378}
   m_Layer: 8
   m_Name: rain-arrow
   m_TagString: arrow
@@ -748,7 +749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   turnSpeed: 5
-  useMouse: 0
+  useMouse: 1
   heartPrefab: {fileID: 140114, guid: c786bdc3092be4a4b9ba8f8966334e20, type: 2}
   colliders:
   - {fileID: 2109726370}
@@ -758,6 +759,7 @@ MonoBehaviour:
   greenContactSound: {fileID: 8300000, guid: 3565aab7c8b6745f1b0908cd299f852c, type: 3}
   blueContactSound: {fileID: 8300000, guid: 5b8722bffa9a74be78209714c2b000ba, type: 3}
   yellowContactSound: {fileID: 8300000, guid: 76db9963b944e40479515853af36eac7, type: 3}
+  iceContactSound: {fileID: 8300000, guid: bf7a2d154d5244f8bbfe27355f237e50, type: 3}
 --- !u!60 &2109726370
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1049,6 +1051,64 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 5b8722bffa9a74be78209714c2b000ba, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!82 &2109726378
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2109726366}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: bf7a2d154d5244f8bbfe27355f237e50, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
