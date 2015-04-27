@@ -50,7 +50,9 @@ public class ArrowController : MonoBehaviour {
 
 	public AudioClip bubbleContactSound;
 	public AudioClip redDotContactSound;
-
+	public AudioClip greenContactSound;
+	public AudioClip blueContactSound;
+	public AudioClip yellowContactSound;
 
 	// Use this for initialization
 	void Start () {
@@ -298,12 +300,15 @@ public class ArrowController : MonoBehaviour {
 //			}
 		}
 		else if (other.CompareTag("yellowdot")){
+			audio.PlayOneShot(yellowContactSound);
+
 			moveSpeed = moveSpeed * 2;
 			setEffectText("Speedup!", Color.yellow, other.gameObject);
 			speedUpTime = Time.time;
 			Destroy (other);
 		}
 		else if (other.CompareTag("greendot")){
+			audio.PlayOneShot(greenContactSound);
 
 			if(modeChooser == 1){
 				hp += 30;
@@ -329,6 +334,8 @@ public class ArrowController : MonoBehaviour {
 			Destroy (other);
 		}
 		else if (other.CompareTag("bluedot")){
+			audio.PlayOneShot(blueContactSound);
+
 			//hp -= 15;
 			if(modeChooser == 1){
 				hpGT.text = "HP: " + hp;
