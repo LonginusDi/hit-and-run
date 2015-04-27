@@ -30,7 +30,7 @@ public class BubbleCreator: MonoBehaviour {
 		Instantiate(bubblePrefab, bubblePos, Quaternion.identity);
 		pastTime = Time.time - startTime;
 		pastTime = 1 + pastTime / 20;
-		if (numberOfBubbles < 18) {
+		if (numberOfBubbles < 25) {
 			Invoke ("SpawnBubble", Random.Range (minSpawnTime / pastTime, maxSpawnTime / pastTime));
 			numberOfBubbles++;
 //			Debug.Log("number of bubbles " + numberOfBubbles);
