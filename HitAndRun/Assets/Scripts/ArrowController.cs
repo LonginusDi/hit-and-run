@@ -16,7 +16,7 @@ public class ArrowController : MonoBehaviour {
 	private PolygonCollider2D[] colliders;
 	private int currentColliderIndex = 0;
 
-	private static float AccelerometerUpdateInterval = 1 / 60;
+	private static float AccelerometerUpdateInterval = 1;
 	private static float LowPassKernelWidthInSeconds = 1;
 	private float LowPassFilterFactor = AccelerometerUpdateInterval / LowPassKernelWidthInSeconds; 
 	private Vector3 lowPassValue = Vector3.zero;
