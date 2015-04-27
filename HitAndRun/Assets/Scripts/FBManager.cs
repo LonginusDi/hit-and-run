@@ -23,6 +23,8 @@ public class FBManager : MonoBehaviour {
 		Debug.Log ("FB init done.");
 		if (FB.IsLoggedIn) {
 			Debug.Log ("FB logged in.");
+			UIFBIsLoggedIn.SetActive(true);
+			UIFBnotLoggedIn.SetActive(false);
 		} else {
 			Debug.Log("FB not logged in.");
 			//			FBLogin();
