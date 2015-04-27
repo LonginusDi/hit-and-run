@@ -9,6 +9,10 @@ public class UIManagerScript : MonoBehaviour {
 //		FB.Init(onInitComplete:"", onHideUnity:null);
 	}
 
+	public void Tutorial(){
+		Application.LoadLevel ("tutorialScene");
+	}
+
 	public void Menu(){
 		Application.LoadLevel ("modeChoosingScene");
 	}

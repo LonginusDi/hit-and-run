@@ -3,6 +3,7 @@ using System.Collections;
 
 public class modeChoosingScene : MonoBehaviour {
 
+	public AudioClip clickSound;
 
 	// Use this for initialization
 	void Start () {
@@ -10,12 +11,16 @@ public class modeChoosingScene : MonoBehaviour {
 	}
 
 	public void ChooseBase(){
+		audio.PlayOneShot(clickSound);
+
 		ArrowController.modeChooser = 1;
 		BubbleCreator.numberOfBubbles = 0;
 		Application.LoadLevel ("levelChoosingScene");
 	}
 
 	public void ChooseEndless(){
+		audio.PlayOneShot(clickSound);
+
 		ArrowController.modeChooser = 2;
 		BubbleCreator.numberOfBubbles = 0;
 		RedDotController.timeCount = 15.0f;
@@ -28,6 +33,8 @@ public class modeChoosingScene : MonoBehaviour {
 	}
 
 	public void ChooseTimeRace(){
+		audio.PlayOneShot(clickSound);
+
 		ArrowController.modeChooser = 3;
 		ArrowController.startTime = Time.time;
 		BubbleCreator.numberOfBubbles = 0;
