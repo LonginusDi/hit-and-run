@@ -11,7 +11,8 @@ public class FBManager : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-	
+//		UIFBIsLoggedIn.SetActive(true);
+//		UIFBnotLoggedIn.SetActive(false);	
 	}
 	
 	// Update is called once per frame
@@ -25,7 +26,9 @@ public class FBManager : MonoBehaviour {
 			Debug.Log ("FB logged in.");
 		} else {
 			Debug.Log("FB not logged in.");
-			//			FBLogin();
+//			//			FBLogin();
+//			UIFBIsLoggedIn.SetActive(false);
+//			UIFBnotLoggedIn.SetActive(true);
 		}
 	}
 	private void OnHideUnity(bool isGameShown){

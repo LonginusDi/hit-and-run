@@ -58,6 +58,7 @@ public class BubbleController : MonoBehaviour {
 
 	public void BubbleDisappear(){
 		BubbleCreator.numberOfBubbles--;
+		Debug.Log("number of bubbles after elimination " + BubbleCreator.numberOfBubbles);
 		CreateRedDot ();
 		DestroyObject (gameObject);
 	}

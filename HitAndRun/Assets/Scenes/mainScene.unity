@@ -73,7 +73,6 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
-    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &344343460
 GameObject:
@@ -518,8 +517,8 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
+  ignoreReversedGraphics: 1
+  blockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -642,6 +641,8 @@ GameObject:
   - 60: {fileID: 2109726370}
   - 95: {fileID: 2109726372}
   - 50: {fileID: 2109726373}
+  - 82: {fileID: 2109726374}
+  - 82: {fileID: 2109726371}
   m_Layer: 8
   m_Name: rain-arrow
   m_TagString: arrow
@@ -696,10 +697,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   turnSpeed: 5
-  useMouse: 0
+  useMouse: 1
+  heartPrefab: {fileID: 140114, guid: c786bdc3092be4a4b9ba8f8966334e20, type: 2}
   colliders:
   - {fileID: 2109726370}
   effectPrefab: {fileID: 196774, guid: ee270f505ea124a48bfac1891972a758, type: 2}
+  bubbleContactSound: {fileID: 8300000, guid: fa5db1aaaa48d47258de36543a2bf1a8, type: 3}
+  redDotContactSound: {fileID: 8300000, guid: 7f3a279e1bb9e4a97bf9cdb9b23c2992, type: 3}
 --- !u!60 &2109726370
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -711,50 +715,73 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_Poly:
     m_Paths:
-    - - {x: .569999993, y: -.200000003}
-      - {x: .839999974, y: -.109999999}
-      - {x: .980000019, y: -.0599999987}
-      - {x: 1, y: -.0299999993}
-      - {x: 1, y: .00999999978}
-      - {x: .970000029, y: .0399999991}
-      - {x: .910000026, y: .0599999987}
-      - {x: .800000012, y: .100000001}
-      - {x: .680000007, y: .140000001}
-      - {x: .569999993, y: .180000007}
-      - {x: .449999988, y: .219999999}
-      - {x: .340000004, y: .25999999}
-      - {x: .219999999, y: .300000012}
-      - {x: .109999999, y: .340000004}
-      - {x: -.00999999978, y: .379999995}
-      - {x: -.119999997, y: .419999987}
-      - {x: -.239999995, y: .460000008}
-      - {x: -.409999996, y: .519999981}
-      - {x: .476842403, y: .0578437448}
-      - {x: -.173627794, y: .282177031}
-      - {x: .0574504733, y: .269647419}
-      - {x: -.889999986, y: .689999998}
-      - {x: -.959999979, y: .689999998}
-      - {x: -.99000001, y: .660000026}
-      - {x: .0735498667, y: .247168779}
-      - {x: -.949999988, y: .579999983}
-      - {x: -.879999995, y: .519999981}
-      - {x: .0866071582, y: .119764894}
-      - {x: -.699999988, y: .230000004}
-      - {x: -.0209343433, y: -.0421132892}
-      - {x: -.0425882936, y: .188101083}
-      - {x: .218286544, y: .162224874}
-      - {x: .191338286, y: .250741422}
-      - {x: -.660000026, y: -.0799999982}
-      - {x: -.670000017, y: -.0900000036}
-      - {x: -.709999979, y: -.270000011}
-      - {x: -.810000002, y: -.430000007}
-      - {x: -.879999995, y: -.529999971}
-      - {x: -.99000001, y: -.649999976}
-      - {x: -.99000001, y: -.680000007}
-      - {x: -.959999979, y: -.709999979}
-      - {x: .144931018, y: -.0733523965}
-      - {x: .151783586, y: -.363019884}
-      - {x: .220097482, y: -.289647371}
+    - - {x: -.305000007, y: .349999994}
+      - {x: -.375, y: .230000004}
+      - {x: -.375, y: .00999999978}
+      - {x: -.224999994, y: -.180000007}
+      - {x: -.0250000004, y: -.349999994}
+      - {x: .0450000018, y: -.349999994}
+      - {x: .375, y: .0199999996}
+      - {x: .375, y: .270000011}
+      - {x: .254999995, y: .349999994}
+--- !u!82 &2109726371
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2109726366}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 7f3a279e1bb9e4a97bf9cdb9b23c2992, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!95 &2109726372
 Animator:
   serializedVersion: 3
@@ -785,3 +812,61 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+--- !u!82 &2109726374
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2109726366}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: fa5db1aaaa48d47258de36543a2bf1a8, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2

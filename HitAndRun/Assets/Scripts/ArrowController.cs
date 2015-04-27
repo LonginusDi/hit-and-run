@@ -8,6 +8,8 @@ public class ArrowController : MonoBehaviour {
 	private float smooth = 650.0f;
 
 	public bool useMouse;
+	public GameObject heartPrefab;
+	private ArrayList heartArray;
 
 	public static bool isInvincible = false;
 
@@ -44,6 +46,10 @@ public class ArrowController : MonoBehaviour {
 
 	public GameObject effectPrefab;
 
+	public AudioClip bubbleContactSound;
+	public AudioClip redDotContactSound;
+
+
 	// Use this for initialization
 	void Start () {
 		moveDirection = Vector3.right;
@@ -59,10 +65,17 @@ public class ArrowController : MonoBehaviour {
 		}
 
 		if (modeChooser == 2) {
-			heartsGO = GameObject.Find ("hearts");
-			heartsGT = heartsGO.GetComponent<GUIText> ();
-			heartsGT.text = "Hearts: " + hearts;
+//			heartsGO = GameObject.Find ("hearts");
+//			heartsGT = heartsGO.GetComponent<GUIText> ();
+//			heartsGT.text = "Hearts: " + hearts;
 
+			heartArray = new ArrayList();
+			int i;
+			for(i = 0; i <= 2; i++){
+				Vector3 newHeartPos = new Vector3(-6+i,3,0);
+				GameObject newHeartPrefab = Instantiate(heartPrefab, newHeartPos, Quaternion.identity) as GameObject;
+				heartArray.Add(newHeartPrefab);
+			}
 			scoreGO = GameObject.Find ("score");
 			scoreGT = scoreGO.GetComponent<GUIText> ();
 
@@ -215,6 +228,8 @@ public class ArrowController : MonoBehaviour {
 	{
 		if (other.CompareTag ("bubble")) {
 //			Destroy(other.gameObject);
+			audio.PlayOneShot(bubbleContactSound);
+
 			other.transform.parent.GetComponent<BubbleController>().TouchedByArrow();
 			Vector3 dotPos = Camera.main.WorldToViewportPoint(other.transform.position);
 			if(modeChooser == 1){
@@ -233,8 +248,11 @@ public class ArrowController : MonoBehaviour {
 
 				if(countBubbles >= 15){
 					hearts += 1;
-					heartsGT.text = "Hearts: " + hearts;
+//					heartsGT.text = "Hearts: " + hearts;
 					countBubbles = 0;
+					Vector3 newHeartPos = new Vector3(-6+heartArray.Count,3,0);
+					GameObject newHeartPrefab = Instantiate(heartPrefab, newHeartPos, Quaternion.identity) as GameObject;
+					heartArray.Add(newHeartPrefab);
 				}
 			}
 			if(modeChooser == 3){
@@ -250,6 +268,8 @@ public class ArrowController : MonoBehaviour {
 //			}
 		}
 		else if (other.CompareTag("reddot") && isInvincible == false){
+			audio.PlayOneShot(redDotContactSound);
+
 			StartCoroutine(Blink(1f));
 			if(modeChooser == 1 || modeChooser == 3){
 				hp -= 30;
@@ -257,9 +277,16 @@ public class ArrowController : MonoBehaviour {
 				setEffectText("-30", Color.red, other.gameObject);
 			}
 			else if(modeChooser == 2){
-				hearts -= 1;
-				heartsGT.text = "Hearts: " + hearts;
+//				heartsGT.text = "Hearts: " + hearts;
 				setEffectText("Heart -1", Color.red, other.gameObject);
+
+				GameObject lastHeart = (GameObject)heartArray[heartArray.Count-1];
+				heartArray.RemoveAt(heartArray.Count-1);
+				Debug.Log(heartArray.Count);
+
+				Destroy(lastHeart.gameObject);
+				hearts -= 1;
+
 			}
 //			hpGT.text = "HP: " + hp;
 //			if (hp <= 0){
@@ -281,8 +308,11 @@ public class ArrowController : MonoBehaviour {
 			}
 			if(modeChooser == 2){
 				hearts += 1;
-				heartsGT.text = "Hearts: " + hearts;
+//				heartsGT.text = "Hearts: " + hearts;
 				setEffectText("Heart+1", Color.green, other.gameObject);
+				Vector3 newHeartPos = new Vector3(-6+heartArray.Count,3,0);
+				GameObject newHeartPrefab = Instantiate(heartPrefab, newHeartPos, Quaternion.identity) as GameObject;
+				heartArray.Add(newHeartPrefab);
 			}
 			if(modeChooser == 3){
 				hp += 30;
