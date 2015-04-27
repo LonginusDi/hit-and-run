@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class BubbleCreator: MonoBehaviour {
 	public float minSpawnTime = 2f; 
@@ -33,7 +34,17 @@ public class BubbleCreator: MonoBehaviour {
 		if (numberOfBubbles < 25) {
 			Invoke ("SpawnBubble", Random.Range (minSpawnTime / pastTime, maxSpawnTime / pastTime));
 			numberOfBubbles++;
-//			Debug.Log("number of bubbles " + numberOfBubbles);
+			Debug.Log ("number of bubbles after spawn " + numberOfBubbles);
+		} else {
+			StartCoroutine(WaitForLessBubbles());
 		}
+	}
+
+	IEnumerator WaitForLessBubbles(){
+		while (numberOfBubbles >= 25) {
+			yield return new WaitForSeconds(0.1f);
+
+		}
+		Invoke ("SpawnBubble", Random.Range (minSpawnTime / pastTime, maxSpawnTime / pastTime));
 	}
 }
