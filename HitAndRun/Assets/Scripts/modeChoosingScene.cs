@@ -2,16 +2,13 @@
 using System.Collections;
 
 public class modeChoosingScene : MonoBehaviour {
-
-	public AudioClip clickSound;
-
+	
 	// Use this for initialization
 	void Start () {
 	
 	}
 
 	public void ChooseBase(){
-		audio.PlayOneShot(clickSound);
 
 		ArrowController.modeChooser = 1;
 		BubbleCreator.numberOfBubbles = 0;
@@ -19,7 +16,6 @@ public class modeChoosingScene : MonoBehaviour {
 	}
 
 	public void ChooseEndless(){
-		audio.PlayOneShot(clickSound);
 
 		ArrowController.modeChooser = 2;
 		BubbleCreator.numberOfBubbles = 0;
@@ -34,7 +30,6 @@ public class modeChoosingScene : MonoBehaviour {
 	}
 
 	public void ChooseTimeRace(){
-		audio.PlayOneShot(clickSound);
 
 		ArrowController.modeChooser = 3;
 		ArrowController.startTime = Time.time;
