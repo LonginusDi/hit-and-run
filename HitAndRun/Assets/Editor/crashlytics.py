@@ -22,8 +22,8 @@ project = XcodeProject.Load(path +'/Unity-iPhone.xcodeproj/project.pbxproj')
 # project.add_file('System/Library/Frameworks/StoreKit.framework', tree='SDKROOT')
 # project.add_file('System/Library/Frameworks/Social.framework', tree='SDKROOT', weak=True)
 # project.add_file('usr/lib/libsqlite3.dylib', tree='SDKROOT')
-project.add_file(path + "/../Crashlytics.framework", tree='SDKROOT')
-project.add_file(path + "/../Fabric.framework", tree='SDKROOT')
+project.add_file_if_doesnt_exist(path + "/../Crashlytics.framework")
+project.add_file_if_doesnt_exist(path + "/../Fabric.framework")
 
 # print('Step 2: add custom libraries and native code to xcode, exclude any .meta file')
 # files_in_dir = os.listdir(fileToAddPath)
@@ -51,9 +51,18 @@ project.add_other_buildsetting('DEPLOYMENT_POSTPROCESSING', 'YES')
 project.add_other_buildsetting('COPY_PHASE_STRIP', 'YES')
 project.add_other_buildsetting('STRIP_INSTALLED_PRODUCT', 'YES')
 project.add_other_buildsetting('GCC_GENERATE_DEBUGGIN_SYMBOLS', 'YES')
+project.add_other_buildsetting('SEPARATE_STRIP', 'YES')
+
+print('Step4: modify bash script')
+crash_bash_script = "if [ \"$DEBUG_INFORMATION_FORMAT\" = \"dwarf-with-dsym\" ]; then\n \
+    \t./Fabric.framework/run " + "d1dfd7c5b0fdae292e5a4cbfc409f31d8f2d3aba aa27c93efc28e337cb57610009590d1be0e2b0517e5bf4e3eda3528b07b5d92a" + "\n \
+else\n \
+    \techo \"Not generating a dSYM, not running Crashlytics\"\n \
+fi"
+project.add_run_script_all_targets(crash_bash_script)
 
 
-print('Step 4: save our change to xcode project file')
+print('Step 5: save our change to xcode project file')
 if project.modified:
     project.backup()
     project.saveFormat3_2()
