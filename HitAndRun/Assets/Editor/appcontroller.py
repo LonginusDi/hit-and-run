@@ -44,6 +44,8 @@ def importHeaders():
 #import <Crashlytics/Crashlytics.h>
 '''
 
+def extraCodeToAddInAppControllerMMFile():
+    return ''''''
 
     
 def touch_implementation(appcontroller_filename):
@@ -58,7 +60,7 @@ def touch_implementation(appcontroller_filename):
 	#position to add insert at the beginning o
     positionsInMethod = []
     
-    methodSignatures.append('(BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions')
+    methodSignatures.append('- (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions')
     valueToAppend.append('[Fabric with:@[CrashlyticsKit]];')
     positionsInMethod.append("begin")
 
