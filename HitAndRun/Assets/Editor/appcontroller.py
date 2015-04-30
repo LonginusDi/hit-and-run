@@ -61,7 +61,8 @@ def touch_implementation(appcontroller_filename):
     positionsInMethod = []
     
     methodSignatures.append('- (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions')
-    valueToAppend.append('[Fabric with:@[CrashlyticsKit]];')
+    # valueToAppend.append('[Fabric with:@[CrashlyticsKit]];')
+    valueToAppend.append('[[Crashlytics sharedInstance] setDebugMode:YES]; \n [Crashlytics startWithAPIKey:@"d1dfd7c5b0fdae292e5a4cbfc409f31d8f2d3aba"]; ');
     positionsInMethod.append("begin")
 
     process_app_controller_wrapper(appcontroller_filename, newContent, methodSignatures, valueToAppend, positionsInMethod, extraCodeToAddInAppControllerMMFile())    
