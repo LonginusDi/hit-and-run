@@ -10,9 +10,13 @@ print('Step 1: add system libraries ')
 project = XcodeProject.Load(path +'/Unity-iPhone.xcodeproj/project.pbxproj')
 project.add_file_if_doesnt_exist(path + "/../Crashlytics.framework")
 project.add_file_if_doesnt_exist(path + "/../Fabric.framework")
+project.add_file_if_doesnt_exist(path + "/../libc++.1.dylib")
+project.add_file_if_doesnt_exist(path + "/../libiconv.2.dylib")
+project.add_file_if_doesnt_exist(path + "/../libz.1.dylib")
 
 print('Step 2: modify the UnityAppController')
 appcontroller.touch_implementation(path + '/Classes/UnityAppController.mm')
+appcontroller.modify_plist(path + '/info.plist')
 
 print('Step 3: change build setting')
 project.add_other_buildsetting('GCC_ENABLE_OBJC_EXCEPTIONS', 'YES')
